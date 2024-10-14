@@ -1,0 +1,16 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    scroll-behavior: smooth;  /* Smooth scrolling */
+}
+
+section {
+    height: 100vh; /* 100% of the viewport height */
+    display: flex; /* Flexbox to center content */
+    flex-direction: column;
+    justify-content: center; /* Vertically center content */
+    align-items: center; /* Horizontally center content */
+    padding: 20px;
+    box-sizing: border-box;
+}
