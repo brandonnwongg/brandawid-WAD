@@ -31,7 +31,6 @@ section {
     border-radius: 5px;
     border: 4px solid #6B4226;
     background-color: #f2e5d7;
-    box-shadow: 0px 4px 10px #6B4226;
 }
 
 #loginForm input[type="submit"] {
