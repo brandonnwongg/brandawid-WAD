@@ -3,17 +3,17 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    scroll-behavior: smooth;  /* Smooth scrolling */
 }
 
 section {
-    height: 100vh; /* 100% of the viewport height */
+    width: 100vw; /* all width of viewport */
+    height: 100vh; /* all the viewport height */
     display: flex; /* Flexbox to center content */
     flex-direction: column;
     justify-content: center; /* Vertically center content */
     align-items: center; /* Horizontally center content */
-    padding: 20px;
     box-sizing: border-box;
+    position: relative; /* make sure everything stays in position */
 }
 
 #loginForm {
@@ -59,8 +59,14 @@ section {
  } 
 
 #logo {
-    position: absolute; /* Ensures that left, top, etc. will work */
-    left: 352px; /* abit of tuning */
-    top: 10px;
+    margin-left: -15px;
+    height: auto;
+}
+
+#updateScreen {
+    border: 4px solid #6B4226;
+    background-color: #d4b483;
+    width: 90vw;
+    height: 90vh;
 }
 
