@@ -71,3 +71,10 @@ body, html {
     height: auto; 
 }
 
+#login-screen {
+    visibility: hidden;
+}
+
+#login-screen:target{
+    visibility: visible;
+}
