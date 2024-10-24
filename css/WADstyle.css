@@ -18,21 +18,17 @@ body, html {
     z-index: 1;
 }
 
-#login-screen {
-    background-color: #606c38;
-    top: 100%;
-    left: 50%;
-    z-index: 2;
-}
 
 #loginForm {
     border: 4px solid #6B4226;
     padding: 20px;
     width: 300px; /* Form width */
-    background-color: #d4b483; /* Background of the form */
+    height: 380px;
+    background-color: #71BD9A; /* Background of the form */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0px 4px 10px #6B4226;
     z-index: 3; 
+    align-items: center;
 }
 
 #loginForm input[type="text"], #loginForm input[type="password"] {
@@ -45,8 +41,8 @@ body, html {
 #loginForm input[type="submit"] {
     width: 35%;
     border-radius: 5px;
-    border: 4px solid #A0522D;
-    background-color: #D2691E;
+    border: 4px solid #6b506f;
+    background-color: #7e6188;
     box-shadow: 0px 4px 10px black;
     float: right; /* float right of form */
     color: white;
@@ -56,8 +52,8 @@ body, html {
 }
 
 #loginForm input[type="submit"]:hover {
-    background-color: #A0522D; /* Darker green on hover */
-    box-shadow: inset 0px 3px 8px #A0522D;
+    background-color: #6b506f; /* Darker green on hover */
+    box-shadow: inset 0px 3px 8px #6b506f;
 }
 
 #loginForm label {
@@ -70,5 +66,8 @@ body, html {
 #logo {
     display: block;
     margin-bottom: 20px;
+    margin-left: 25px;
+    width: 250px;
+    height: auto; 
 }
 
