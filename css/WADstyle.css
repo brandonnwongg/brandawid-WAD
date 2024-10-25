@@ -91,6 +91,7 @@ body, html {
     text-decoration: none; /* remove underline on x */
     line-height: 17px;
     box-shadow: 0px 1px 4px black;
+    border: 2px solid darkred;
 }
 
 .close-button:hover {
