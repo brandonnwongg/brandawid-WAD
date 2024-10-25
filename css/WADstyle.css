@@ -18,6 +18,7 @@ body, html {
     box-shadow: 0px 4px 10px #6B4226;
     z-index: 5; 
     align-items: center;
+    position: relative;
 }
 
 #loginForm input[type="text"], #loginForm input[type="password"] {
@@ -74,4 +75,25 @@ body, html {
 
 #login-screen:target{
     display: flex;
+}
+
+.close-button {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    text-decoration: none; /* remove underline on x */
+    line-height: 17px;
+    box-shadow: 0px 1px 4px black;
+}
+
+.close-button:hover {
+    background-color: darkred;
+    box-shadow: inset 0px 1px 4px darkred;
 }
