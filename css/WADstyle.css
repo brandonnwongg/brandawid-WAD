@@ -126,4 +126,21 @@ body, html {
     z-index: 5; 
     align-items: center;
     position: relative;
+    display: flex;
+}
+
+.flex-container {
+    display: flex;
+    width: 90%;
+    height: auto;
+    align-items: stretch;
+}
+
+.leftUpdate, .rightUpdate {
+    flex: 1;
+}
+
+#gorli {
+    max-width: 100%;
+    height: auto;
 }
