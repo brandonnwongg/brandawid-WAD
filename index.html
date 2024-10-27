@@ -6,68 +6,101 @@
     <title>to be named</title>
     <link rel="stylesheet" href="css/WADstyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!--Login Screen-->
-    <section id = "login-screen">
-        <!-- use canva free option to design logo -->
-        <img src="improveBerlin.png" alt="project logo" id="logo" />
-
+    <div id ="login-screen" class="flex-container">
         <!--Form for Logging in-->
         <form id="loginForm">
+            <a href="#" class="close-button">&times;</a>   
+            <!-- use canva free option to design logo -->
+            <img src="improveBerlin.png" alt="project logo" id="logo" />
+
             <!--Username-->
-            <label for="username">U S E R N A M E : </label>
+            <label for="username">USERNAME  </label>
             <input type="text" id="usernameID" name="username" required/>
             <br/> <br/>
 
             <!-- Password -->
-            <label for="password">P A S S W O R D : </label>
+            <label for="password">PASSWORD  </label>
             <input type="password" id="passwordID" name="password" required/>
             <br/> <br/> <br/>
 
             <!--Login Button-->
-            <input type="submit" value="L O G I N"/>
+            <input type="submit" value="LOGIN"/>
         </form>
+    </div>
+     <!--Update and Delete Screen-->
+     <div id ="update-delete-screen">
+        <div id="updateScreen">
+            <a href="#" class="close-button">&times;</a>
+            <div id="imageContainer">
+                <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>    
+            </div>
+            <form class="updateForm" action="" method="POST">
 
-    </section>
-    <!--Main Screen-->
-    <section id =  "main-screen">
+                <!-- name of location-->
+                <label for="location">LOCATION </label>
+                <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
+                <!-- issue -->
+                <label for="description">DESCRIPTION</label>
+                <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
+                <!-- Street & No. -->
+                <label for="street">STREET & NO. </label>
+                <input type="text" id="street" name="street" value="Hermanstr. 160" required />
+                <!-- ZIP -->
+                <label for="zip">ZIP </label>
+                <input type="text" id="zip" name="zip" value="12051" required />
+                <!-- city -->
+                <label for="city">CITY</label>
+                <input type="text" id="city" name="city" value="Berlin" required />
+
+                <!-- Tags -->
+                <fieldset class="tagsContainer">
+                    <legend>TAGS</legend>
+                    <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
+                    <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
+                    <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
+                    <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
+                    <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
+                    <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
+                    <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
+                    <label><input type="checkbox" name="tags" value="Other"> Other</label>
+                    <label for="subtags">SUBTAGS</label>
+                    <select id="subtags" name="subtags">
+                        <option value="mangelhaft">mangelhaft</option>
+                        <option value="beschädigt">beschädigt</option>
+                        <option value="fehlt">fehlt</option>
+                        <option value="in Arbeit">in Arbeit</option>
+                    </select>
+                </fieldset>
+                <div class="uploadContainer">
+                    <input type="file" id="uploadButton" name="uploadButton" />
+                </div>
+                <div class="buttonContainer">
+                <!--Update Button-->
+                <input type="submit" value="update"/>
+
+                <!--Delete Button-->
+                <input type="submit" value="delete"/>
+
+                <!--Cancel button-->
+                <input type="submit" value="cancel"/>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div id ="main-screen">
+    <header>
         <h1>main screen</h1>
-    </section>
+        <a href="#login-screen" class="login-button">Login</a>
+        <a href="#update-delete-screen" class="upate-button">Update</a>
+    </header>
+    </div>
     <!--Add Screen-->
-    <section id = "add-screen">
+    <div id ="add-screen">
         <h1>add screen</h1>
-    </section>
-    <!--Update and Delete Screen-->
-    <section id = "update-delete-screen">
-        <h1>update and delete screen</h1>
-        <form id="updateScreen">
-            <!-- name of location-->
-            <label for="location">Location </label>
-            <input type="text" id="locationName" name="locationName" value="HTW Berlin" required/>
-            <br/><br/>
-
-            <!-- issue -->
-            <label for="issue">Issue </label>
-            <input type="text" id="locationIssue" name="locationIssue" value="No Issue Yet" required/>
-            <br/><br/>
-
-            <!-- suggestion to fix issue-->
-            <label for="suggestion">Suggestion </label>
-            <input type="text" id="locationSuggestion" name="locationSuggestion" value="Nothing" required/>
-            <br/><br/>
-
-            <!--Update Button-->
-            <input type="submit" value="update"/>
-
-            <!--Delete Button-->
-            <input type="submit" value="delete"/>
-
-            <!--Cancel button-->
-            <input type="submit" value="cancel"/>
-
-        </form>
-    </section>
+    </div>
 </body>
 </html>
 
