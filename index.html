@@ -31,74 +31,57 @@
     </div>
      <!--Update and Delete Screen-->
      <div id ="update-delete-screen">
-        
-        <form id="updateScreen">
+        <div id="updateScreen">
             <a href="#" class="close-button">&times;</a>
-            <div class="leftUpdate">
-                <img src="gorlitzer.png" alt="gorli" id="gorli"/>
-                <label for="uploadImage">Upload</label>
-                <input type="file" id="uploadImage" name="uploadImage" accept="image/*">
-            </div>
-            <div class="rightUpdate">
-            <!-- name of location-->
-            <label for="location">Location </label>
-            <input type="text" id="locationName" name="locationName" value="HTW Berlin" required/>
-            <br/><br/>
+            <img src="background.png" alt="gorli" id="gorli"/>
+            <form class="updateForm" action="" method="POST">
+                <!-- name of location-->
+                <label for="location">Location </label>
+                <input type="text" id="locationName" name="locationName" value="HTW Berlin" required/>
+                <!-- issue -->
+                <label for="description">Description </label>
+                <input type="text" id="description" name="description" value="No Issue Yet" required/>
+                <!-- Street & No. -->
+                <label for="street">Street & No. </label>
+                <input type="text" id="street" name="street" required />
+                <!-- ZIP -->
+                <label for="zip">ZIP </label>
+                <input type="text" id="zip" name="zip" required />
+                <!-- city -->
+                <label for="city">City </label>
+                <input type="text" id="city" name="city" value="Berlin" required />
 
-            <!-- issue -->
-            <label for="description">Description </label>
-            <input type="text" id="description" name="description" value="No Issue Yet" required/>
-            <br/><br/>
+                <!-- Tags -->
+                <fieldset>
+                    <legend>Tags (select applicable):</legend>
+                    <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
+                    <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
+                    <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
+                    <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
+                    <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
+                    <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
+                    <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
+                    <label><input type="checkbox" name="tags" value="Other"> Other</label>
+                    <label for="subtags">Subtags: </label>
+                    <select id="subtags" name="subtags">
+                        <option value="mangelhaft">mangelhaft</option>
+                        <option value="beschädigt">beschädigt</option>
+                        <option value="fehlt">fehlt</option>
+                        <option value="in Arbeit">in Arbeit</option>
+                    </select>
+                </fieldset>
 
-            <!-- Street & No. -->
-            <label for="street">Street & No. </label>
-            <input type="text" id="street" name="street" required />
-            <br/><br/>
+                <!--Update Button-->
+                <input type="submit" value="update"/>
 
-            <!-- ZIP -->
-            <label for="zip">ZIP </label>
-            <input type="text" id="zip" name="zip" required />
-            <br/><br/>
+                <!--Delete Button-->
+                <input type="submit" value="delete"/>
 
-            <!-- city -->
-            <label for="city">City </label>
-            <input type="text" id="city" name="city" value="Berlin" required />
-            <br/><br/>
+                <!--Cancel button-->
+                <input type="submit" value="cancel"/>
 
-            <!-- Tags -->
-            <fieldset>
-                <legend>Tags (select applicable):</legend>
-                <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
-                <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
-                <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
-                <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
-                <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
-                <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
-                <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
-                <label><input type="checkbox" name="tags" value="Other"> Other</label>
-                <br/><br/>
-                <label for="subtags">Subtags: </label>
-                <select id="subtags" name="subtags">
-                    <option value="mangelhaft">mangelhaft</option>
-                    <option value="beschädigt">beschädigt</option>
-                    <option value="fehlt">fehlt</option>
-                    <option value="in Arbeit">in Arbeit</option>
-                </select>
-            </fieldset>
-            <br/>
-
-            <!--Update Button-->
-            <input type="submit" value="update"/>
-
-            <!--Delete Button-->
-            <input type="submit" value="delete"/>
-
-            <!--Cancel button-->
-            <input type="submit" value="cancel"/>
-
-           </div>
-
-        </form>
+            </form>
+        </div>
     </div>
     <div id ="main-screen">
     <header>
