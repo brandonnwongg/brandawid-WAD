@@ -144,13 +144,22 @@ body, html {
     
 }
 
-.tags-container {
+.tagsContainer {
     display:grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 8px;
 }
 
 .updateForm fieldset,
-.updateForm  #gorli {
+.updateForm  #gorli,
+.updateForm #uploadButton {
     grid-column: 1 / -1;
+}
+
+
+.buttonContainer {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 8px;
+    grid-column: 1/-1;
 }

@@ -53,8 +53,8 @@
                 <input type="text" id="city" name="city" value="Berlin" required />
 
                 <!-- Tags -->
-                <fieldset>
-                    <legend>Tags (select applicable):</legend>
+                <fieldset class="tagsContainer">
+                    <legend>Tags</legend>
                     <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
                     <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
                     <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
@@ -72,6 +72,7 @@
                     </select>
                 </fieldset>
 
+                <div class="buttonContainer">
                 <!--Update Button-->
                 <input type="submit" value="update"/>
 
@@ -80,7 +81,7 @@
 
                 <!--Cancel button-->
                 <input type="submit" value="cancel"/>
-
+            </div>
             </form>
         </div>
     </div>
