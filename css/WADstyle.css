@@ -129,6 +129,7 @@ body, html {
     display: flex;
 }
 
+/* using  https://www.scale.at/blog/responsive-form-layout-css-grid for css grid inspo */
 .updateForm {
     display: grid;
     gap: 8px;
@@ -141,4 +142,15 @@ body, html {
         gap: 24px;
     }
     
+}
+
+.tags-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.updateForm fieldset,
+.updateForm  #gorli {
+    grid-column: 1 / -1;
 }
