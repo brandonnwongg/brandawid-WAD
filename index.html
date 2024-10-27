@@ -33,9 +33,11 @@
      <div id ="update-delete-screen">
         <div id="updateScreen">
             <a href="#" class="close-button">&times;</a>
+            <div id="imageContainer">
+                <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>    
+            </div>
             <form class="updateForm" action="" method="POST">
-                <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>
-                <input type="file" id="uploadButton" name="uploadButton" />
+
                 <!-- name of location-->
                 <label for="location">Location </label>
                 <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
@@ -74,6 +76,9 @@
 
                 <div class="buttonContainer">
                 <!--Update Button-->
+                <br>
+                <input type="file" id="uploadButton" name="uploadButton" />
+                <br>
                 <input type="submit" value="update"/>
 
                 <!--Delete Button-->
