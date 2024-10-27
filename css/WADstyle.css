@@ -13,7 +13,7 @@ body, html {
     border: 4px solid #6B4226;
     padding: 20px;
     width: 300px; /* Form width */
-    height: 400px;
+    height: 380px;
     background-color: #71BD9A; /* Background of the form */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0px 4px 10px #6B4226;
@@ -24,9 +24,10 @@ body, html {
 
 #loginForm input[type="text"], #loginForm input[type="password"] {
     width: calc(100% - 18px); /* Full width of form */
-    border-radius: 5px;
     border: 4px solid #6B4226;
     background-color: #f2e5d7;
+    border-radius: 5px;
+    font-size: 15px;
 }
 
 #loginForm input[type="submit"] {
@@ -34,25 +35,28 @@ body, html {
     border-radius: 5px;
     border: 4px solid #6b506f;
     background-color: #7e6188;
-    box-shadow: 0px 4px 10px black;
+    box-shadow: 2px 2px 2px black;
     float: right; /* float right of form */
     color: white;
-    text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
-    font-family: 'Alfa Slab One';
-    font-size: 17px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
     cursor: pointer;
+    
 }
 
 #loginForm input[type="submit"]:hover {
     background-color: #6b506f; /* Darker green on hover */
-    box-shadow: inset 0px 3px 8px #6b506f;
+    box-shadow: inset 2px 2px 2px #6b506f;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 18px;
 }
 
 #loginForm label {
-    font-family: 'Alfa Slab One';
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
-    color: #e9e4d8;
-    text-shadow: -1.5px -1.5px 0 #6B4226, 1.5px -1.5px 0 #6B4226, -1.5px 1.5px 0 #6B4226, 1.5px 1.5px 0 #6B4226; /* Black outline */
+    color: black;
+    font-weight: bold;
  } 
 
 #logo {
@@ -148,6 +152,13 @@ body, html {
     border-radius: 5px;
     font-size: 15px;
 }
+
+.updateForm label, .updateForm legend {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+ } 
 
 @media screen and (min-width: 800px) {
     .updateForm {
