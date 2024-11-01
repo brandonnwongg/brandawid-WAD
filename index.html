@@ -9,24 +9,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id ="login-screen" class="flex-container">
-        <!--Form for Logging in-->
+    <div id="login-screen" class="flex-container">
         <form id="loginForm">
-            <a href="#" class="close-button">&times;</a>   
-            <!-- use canva free option to design logo -->
+            <!-- Close Button, der das Login-Screen versteckt -->
+            <button type="button" class="close-button" onclick="closeLoginScreen()">&times;</button>   
             <img src="improveBerlin.png" alt="project logo" id="logo" />
-
-            <!--Username-->
             <label for="username">U S E R N A M E : </label>
-            <input type="text" id="usernameID" name="username" required/>
-            <br/> <br/>
-
-            <!-- Password -->
+            <input type="text" id="usernameID" name="username" required />
+            <br><br>
             <label for="password">P A S S W O R D : </label>
-            <input type="password" id="passwordID" name="password" required/>
-            <br/> <br/> <br/>
-
-            <!--Login Button-->
+            <input type="password" id="passwordID" name="password" required />
+            <br><br><br>
             <input type="submit" value="L O G I N"/>
         </form>
     </div>
@@ -90,13 +83,41 @@
             </form>
         </div>
     </div>
-    <div id ="main-screen">
-    <header>
-        <h1>main screen</h1>
-        <a href="#login-screen" class="login-button">Login</a>
-        <a href="#update-delete-screen" class="upate-button">Update</a>
-    </header>
+
+    
+    <div id="main-screen">
+        <header>
+            <h1>Willkommen bei Improve Berlin!</h1>
+            <h2>Willkommen zurück, User!</h2>
+        </header>
+        
+        <!-- Liste mit vorhandenen Standorten -->
+        <section id="location-list">
+            <h3>Existierende Standorte</h3>
+            <ul>
+                <li>S-Bahn Hermanstraße - Beschädigte Mülleimer</li>
+                <li>Alexanderplatz - Graffiti an der Wand</li>
+                <li>Kottbusser Tor - Defekte Beleuchtung</li>
+            </ul>
+        </section>
+    
+        <!-- Buttons für Add und Logout -->
+        <div class="button-container-main">
+            <a href="#add-screen" class="button">Add</a>
+            <a href="#updateScreen" class="button">Update/Delete</a>
+            <a href="#login-screen" class="button">Logout</a>
+        </div>
+    
+        <!-- Fußzeile -->
+        <footer>
+            <a href="#impressum">Impressum</a> | 
+            <a href="#datenschutz">Datenschutzerklärung</a>
+        </footer>
     </div>
+    
+    <!-- Button, um den Main Screen zu öffnen -->
+    <a href="#main-screen" class="main-screen-button">Main Screen</a>
+    
     <!--Add Screen-->
     <div id ="add-screen">
         <h1>add screen</h1>
