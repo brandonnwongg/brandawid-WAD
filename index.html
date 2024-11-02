@@ -9,17 +9,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="login-screen" class="flex-container">
+    <div id ="login-screen" class="flex-container">
+        <!--Form for Logging in-->
         <form id="loginForm">
-            <!-- Close Button, der das Login-Screen versteckt -->
-            <button type="button" class="close-button" onclick="closeLoginScreen()">&times;</button>   
+            <a href="#" class="close-button">&times;</a>   
+            <!-- use canva free option to design logo -->
             <img src="improveBerlin.png" alt="project logo" id="logo" />
+
+            <!--Username-->
             <label for="username">U S E R N A M E : </label>
-            <input type="text" id="usernameID" name="username" required />
-            <br><br>
+            <input type="text" id="usernameID" name="username" required/>
+            <br/> <br/>
+
+            <!-- Password -->
             <label for="password">P A S S W O R D : </label>
-            <input type="password" id="passwordID" name="password" required />
-            <br><br><br>
+            <input type="password" id="passwordID" name="password" required/>
+            <br/> <br/> <br/>
+
+            <!--Login Button-->
             <input type="submit" value="L O G I N"/>
         </form>
     </div>
@@ -91,24 +98,22 @@
             <h2>Willkommen zurück, User!</h2>
         </header>
         
-        <!-- Liste mit vorhandenen Standorten -->
         <section id="location-list">
-            <h3>Existierende Standorte</h3>
+            <h3>Standorte:</h3>
             <ul>
-                <li>S-Bahn Hermanstraße - Beschädigte Mülleimer</li>
-                <li>Alexanderplatz - Graffiti an der Wand</li>
-                <li>Kottbusser Tor - Defekte Beleuchtung</li>
+                <li><button type="button">Standort 1</button></li>
+                <li><button type="button">Standort 2</button></li>
+                <li><button type="button">Standort 3</button></li>
+                <!-- Füge hier weitere Standorte hinzu -->
             </ul>
         </section>
     
-        <!-- Buttons für Add und Logout -->
         <div class="button-container-main">
-            <a href="#add-screen" class="button">Add</a>
-            <a href="#updateScreen" class="button">Update/Delete</a>
-            <a href="#login-screen" class="button">Logout</a>
+            <a href="#main-screen" class="button">Add</a>
+            <a href="#main-screen" class="button">Update/Delete</a>
+            <a href="" class="button">Logout</a>
         </div>
     
-        <!-- Fußzeile -->
         <footer>
             <a href="#impressum">Impressum</a> | 
             <a href="#datenschutz">Datenschutzerklärung</a>
@@ -116,12 +121,16 @@
     </div>
     
     <!-- Button, um den Main Screen zu öffnen -->
+    <a href="#login-screen" class="login-button">Login</a>
+    <br/>
     <a href="#main-screen" class="main-screen-button">Main Screen</a>
+    <br/>
+    <a href="#add-screen" class="add-button">Add Screen</a>
+    <br/>
+    <a href="#update-delete-screen" class="upate-button">Update Screen</a>
     
-    <!--Add Screen-->
-    <div id ="add-screen">
-        <h1>add screen</h1>
-    </div>
+    
+
 </body>
 </html>
 
