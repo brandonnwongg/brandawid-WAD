@@ -271,7 +271,6 @@ input[type="checkbox"]:checked {
     z-index: 4;
     width: 100vw;
     height: 100vh;
-    justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     padding-bottom: 60px; /* Platz für den Footer schaffen */
@@ -287,14 +286,16 @@ input[type="checkbox"]:checked {
 }
 
 #main-screen header {
-    margin-bottom: 20px;
+    margin-top: 0; /* Abstand nach oben entfernen */
+    padding: 20px; /* Optional: Padding hinzufügen, wenn gewünscht */
+    text-align: center; /* Zentriere den Text */
 }
 
 #main-screen header h2 {
     color: #6B4226;
-    font-family: 'Alfa Slab One', sans-serif;
+    font-family:  sans-serif;
     margin-bottom: 10px;
-    font-weight: 100; /* Super dünn */
+    font-weight: 1500; /* Super dünn */
     font-size: 20px; /* Schriftgröße anpassen, falls nötig */
     text-shadow: none; /* Textschatten entfernen */
     
@@ -323,14 +324,15 @@ input[type="checkbox"]:checked {
 }
 
 #location-list {
-    width: 80%;
-    max-width: 500px;
-    background-color: #71BD9A; /* Background color for the list */
-    padding: 15px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px #6B4226; /* Shadow effect */
-    margin: 20px auto; /* Center the list */
+    width: 90%; /* Erhöhte Breite */
+    max-width: 600px; /* Maximalbreite anpassen, um mehr Platz zu bieten */
+    background-color: #71BD9A; /* Hintergrundfarbe für die Liste */
+    padding: 40px; /* Erhöhtes Padding für mehr Innenabstand */
+    border-radius: 10px; /* Runde Ecken */
+    box-shadow: 0px 4px 10px #6B4226; /* Schatteneffekt */
+    margin: 20px; /* Liste zentrieren */
 }
+
 
 #location-list h3 {
     color: #6B4226;
@@ -371,10 +373,12 @@ input[type="checkbox"]:checked {
 
 .button-container-main {
     display: flex;
-    gap: 20px;
-    margin-top: 20px;
-    justify-content: center; /* Center buttons horizontally */
+    justify-content: center; /* Zentriert die Buttons */
+    gap: 10px; /* Abstand zwischen den Buttons */
+    margin-top: 20px; /* Abstand nach oben */
+    padding: 10px 0; /* Padding für mehr Platz */
 }
+
 
 .button-container-main .button {
     padding: 10px 20px;
@@ -394,14 +398,19 @@ input[type="checkbox"]:checked {
     color: #f2e5d7; /* Change text color on hover */
 }
 
-/* Footer styles */
 footer {
-    margin-top: auto; /* Push footer to the bottom */
-    padding: 10px;
-    background-color: #71BD9A; /* Footer background color */
-    color: #6B4226; /* Footer text color */
-    text-align: center; /* Center footer text */
+    background-color: #71BD9A; /* Footer Hintergrundfarbe */
+    color: white; /* Schriftfarbe */
+    display: flex; /* Flexbox aktivieren */
+    justify-content: center; /* Buttons in der Mitte ausrichten */
+    padding: 30px; /* Padding für den Footer */
+    font-size: 18px; /* Schriftgröße im Footer */
+    margin-top: auto; /* Footer nach unten schieben */
 }
+
+
+
+
 
 footer a {
     color: #6B4226; /* Footer link color */
@@ -411,3 +420,15 @@ footer a {
 footer a:hover {
     text-decoration: underline; /* Underline on hover */
 }
+
+#welcome-title {
+    background-color: #71BD9A; /* Grüner Hintergrund */
+    border: 4px solid #6B4226; /* Braune Umrandung */
+    border-radius: 5px; /* Abgerundete Ecken */
+    padding: 1px 15px; /* Innenabstand für eine kleinere Box */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatteneffekt */
+    margin: 20px auto; /* Abstand oben erhöhen und zentrieren */
+    width: fit-content; /* Größe an den Inhalt anpassen */
+    text-align: center; /* Zentrierter Text */
+}
+
