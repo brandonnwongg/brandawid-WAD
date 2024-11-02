@@ -408,10 +408,6 @@ footer {
     margin-top: auto; /* Footer nach unten schieben */
 }
 
-
-
-
-
 footer a {
     color: #6B4226; /* Footer link color */
     text-decoration: none; /* No underline */
@@ -431,4 +427,113 @@ footer a:hover {
     width: fit-content; /* Größe an den Inhalt anpassen */
     text-align: center; /* Zentrierter Text */
 }
+
+/* Add-Screen Background Overlay */
+#add-screen {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* Grauer, semi-transparenter Hintergrund */
+}
+
+#add-screen:target {
+    display: flex;
+}
+
+/* Add-Screen Style */
+#addScreen {
+    position: relative;
+    border: 4px solid #6B4226;
+    padding: 20px;
+    width: 80vw; /* Form width */
+    height: 80vw;
+    max-width: 600px;
+    max-height: 700px;
+    background-color: #71BD9A; /* Background of the form */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0px 4px 10px #6B4226;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    overflow: auto; /* Scrollbars for overflowing content like images */
+    font-family: 'Open Sans', sans-serif; /* Setting font style same as Update screen */
+}
+
+.addForm {
+    display: grid;
+    gap: 8px;
+    line-height: 1.3;
+    margin-top: 25px;
+}
+
+.addForm input[type="text"],
+.addForm input[type="file"] {
+    border: 4px solid #6B4226;
+    background-color: #f2e5d7;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.addForm fieldset {
+    grid-column: 1 / -1;
+}
+
+.uploadContainer {
+    margin-top: 10px;
+}
+
+.buttonContainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-column: 1/-1;
+}
+
+.buttonContainer input[type="submit"],
+.buttonContainer input[type="button"] {
+    width: 100%;
+    border: 2px solid #6b506f;
+    background-color: #7e6188;
+    box-shadow: 0px 4px 10px black;
+    font-size: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: white;
+}
+
+.buttonContainer input[type="submit"]:hover,
+.buttonContainer input[type="button"]:hover {
+    background-color: #6b506f;
+    box-shadow: inset 2px 2px 2px #6b506f;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 18px;
+}
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
+    text-align: center;
+    font-size: 20px;
+    text-decoration: none; /* remove underline on x */
+    line-height: 17px;
+    box-shadow: 0px 1px 4px black;
+    border: 2px solid darkred;
+}
+
+.close-button:hover {
+    background-color: darkred;
+    box-shadow: inset 0px 1px 4px darkred;
+}
+
 

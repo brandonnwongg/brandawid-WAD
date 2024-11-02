@@ -132,7 +132,63 @@
     <br/>
     <a href="#update-delete-screen" class="upate-button">Update Screen</a>
     
-    
+        <!--Add Screen-->
+        <div id="add-screen">
+            <div id="addScreen">
+                <!-- Close Button -->
+                <a href="#" class="close-button">&times;</a>
+        
+                <!-- Add Form -->
+                <form class="addForm" action="" method="POST">
+                    <h2>Neuen Standort hinzufügen</h2>
+        
+                    <!-- Location Name -->
+                    <label for="locationName">Location Name</label>
+                    <input type="text" id="locationName" name="locationName" placeholder="Enter location name" required />
+        
+                    <!-- Description -->
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" placeholder="Describe the issue" required />
+        
+                    <!-- Street & No. -->
+                    <label for="street">Street & No.</label>
+                    <input type="text" id="street" name="street" placeholder="Enter street address" required />
+        
+                    <!-- ZIP Code -->
+                    <label for="zip">ZIP</label>
+                    <input type="text" id="zip" name="zip" placeholder="Enter ZIP code" required />
+        
+                    <!-- City -->
+                    <label for="city">City</label>
+                    <input type="text" id="city" name="city" placeholder="Enter city" required />
+        
+                    <!-- Tags -->
+                    <fieldset class="tagsContainer">
+                        <legend>Tags</legend>
+                        <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
+                        <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
+                        <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
+                        <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
+                        <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
+                        <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
+                        <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
+                        <label><input type="checkbox" name="tags" value="Other"> Other</label>
+                    </fieldset>
+        
+                    <!-- Image Upload -->
+                    <div class="uploadContainer">
+                        <label for="uploadButton">Upload Image</label>
+                        <input type="file" id="uploadButton" name="uploadButton" />
+                    </div>
+        
+                    <!-- Buttons -->
+                    <div class="buttonContainer">
+                        <input type="submit" value="Save/Submit" />
+                        <input type="button" value="Cancel" onclick="" />
+                    </div>
+                </form>
+            </div>
+        </div>
 
 </body>
 </html>
