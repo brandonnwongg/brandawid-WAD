@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id ="login-screen" class="flex-container">
+    <div id ="login-screen">
         <!--Form for Logging in-->
         <form id="loginForm">
             <a href="#" class="close-button">&times;</a>   
@@ -177,17 +177,36 @@
         <h1>Willkommen zurück, User!</h1>
         <div class="main-container">
         <section id="location-list">
+            <div class="upper-main-container">
             <h2>Standorte</h2>
             <a href="#update-delete-screen" class="update-button">UPDATE</a>
+            </div>
             <ul>
-                <li><button type="button">Standort 1</button></li>
-                <li><button type="button">Standort 2</button></li>
-                <li><button type="button">Standort 3</button></li>
+                <li><button type="button">
+                    <strong>Location</strong>Hermanstraße<br><br>
+                    <strong>Straße</strong>Hermanstr. 160<br><br>
+                    <strong>PLZ</strong>12051<br><br>
+                    <strong>Tags</strong>ÖPNV<br><br>
+                    <strong>Subtags</strong>beschädigt
+                </button></li>
+                <li><button type="button">
+                    <strong>Location</strong>Adlershof<br><br>
+                    <strong>Straße</strong>Abramstr. 18<br><br>
+                    <strong>PLZ</strong>12489<br><br>
+                    <strong>Tags</strong>Fußgängerweg<br><br>
+                    <strong>Subtags</strong>in Arbeit
+                </button></li>
+                <li><button type="button">
+                    <strong>Location</strong>Kaufland<br><br>
+                    <strong>Straße</strong>Rudowerstr. 12<br><br>
+                    <strong>PLZ</strong>12489<br><br>
+                    <strong>Tags</strong>Other<br><br>
+                    <strong>Subtags</strong>mangelhaft
+                </button></li>
                 <li><a href="#add-screen" class="add-button">ADD</a></li>
                 <!-- <li><button type="button">Add</button></li> fuer spater-->
                 <!-- Füge hier weitere Standorte hinzu -->
             </ul>
-
         </section>
         </div>
         

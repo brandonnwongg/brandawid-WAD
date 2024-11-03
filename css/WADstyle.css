@@ -329,12 +329,18 @@ input[type="checkbox"]:checked {
     padding: 0 10px;
     width: calc(100vw - 29px);
     box-sizing: border-box; 
-    margin-bottom: 200px ;
+    margin-bottom: 150px ;
+}
+
+.upper-main-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
 #location-list {
     width: 100%; /* Erhöhte Breite */
-    height: 400px;
+    height: 480px;
     background-color: #71BD9A; /* Hintergrundfarbe für die Liste */
     padding: 10px; /* Erhöhtes Padding für mehr Innenabstand */
     border-radius: 10px; /* Runde Ecken */
@@ -396,14 +402,18 @@ input[type="checkbox"]:checked {
     box-shadow: 2px 2px 2px #6B4226; /* Button shadow */
     font-family: 'Open Sans', sans-serif; /* Font for buttons */
     font-size: 18px; /* Font size for buttons */
-    text-align: center; /* Center text */
     cursor: pointer; /* Pointer cursor on hover */
     text-transform: uppercase; /* Uppercase text */
+    text-align: left;
     transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
 }
 
+#location-list button strong {
+    display: inline-block;
+    width: 100px;
+    color: black;
+}
 #location-list .add-button {
-
     width: 91%;
     height: 272px;
     background-color: #7e6188; /* Button background color */
