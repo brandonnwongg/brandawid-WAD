@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>to be named</title>
+    <title>Improve Berlin</title>
     <link rel="stylesheet" href="css/WADstyle.css">
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
@@ -167,32 +167,36 @@
         <header>
             <div id="welcome-title">
                 <img src="improveBerlin.png" alt="project logo" id="logo-main" />
-                <h2>Willkommen zurück, User!</h2>
-                <a href="" class="button">Logout</a>
+                    <div class="right-side-header">
+                        <!--<input type="submit" value="LOGOUT"/> fuer spater-->
+                        <a href="#login-screen" class="logout-button">LOGOUT</a>
+                    </div>
             </div>
         </header>
         
+        <h1>Willkommen zurück, User!</h1>
+        <div class="main-container">
         <section id="location-list">
-            <h3>Standorte:</h3>
+            <h2>Standorte</h2>
+            <a href="#update-delete-screen" class="update-button">UPDATE</a>
             <ul>
                 <li><button type="button">Standort 1</button></li>
                 <li><button type="button">Standort 2</button></li>
                 <li><button type="button">Standort 3</button></li>
+                <li><a href="#add-screen" class="add-button">ADD</a></li>
+                <!-- <li><button type="button">Add</button></li> fuer spater-->
                 <!-- Füge hier weitere Standorte hinzu -->
             </ul>
+
         </section>
-    
-        <div class="button-container-main">
-            <a href="#main-screen" class="button">Add</a>
-            <a href="#main-screen" class="button">Update/Delete</a>
-            <a href="" class="button">Logout</a>
         </div>
-    
+        
         <footer>
             © HTW Berlin -
             <a href="#main-screen">&nbsp Impressum</a> | 
             <a href="#main-screen">Datenschutzerklärung</a>
         </footer>
+
     </div>
     
     <!-- Button, um den Main Screen zu öffnen -->

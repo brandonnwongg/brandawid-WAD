@@ -245,90 +245,148 @@ input[type="checkbox"]:checked {
     font-family: 'Open Sans', sans-serif;
 }
 
-#main-screen {
-    display: none;
-    position: fixed;
-    z-index: 4;
-    width: 100vw;
-    height: 100vh;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    padding-bottom: 60px; /* Platz für den Footer schaffen */
+/* Main Screen */
+#main-screen header {
+    justify-content: space-between; /* Aligns children to the edges */
+    align-items: center; /* Vertical centering */
+    padding: 10px;
+    width: 100%;
+    border-bottom: 4px solid #6B4226;
+    background-color: #71BD9A;
 }
 
-#main-screen:target {
+#welcome-title {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr; /* three columns layout */
+    width: 100%;
+}
+
+#logo-main {
+    grid-column: 2; /* Ensures the logo is placed in the second column */
+    width: 120px; /* Adjust width as needed */
+    height: auto; /* Maintain aspect ratio */
+    justify-self: center; /* Center the logo in its grid cell */
+}
+
+.right-side-header {
+    grid-column: 3; /* Ensures these elements are placed in the third column */
     display: flex;
     flex-direction: column;
-    text-align: center;
-    background-color: #f2e5d7; /* Main background */
-    padding: 20px;
-    overflow: auto;
+    align-items: flex-end; /* Aligns the text and button to the right */
+    justify-self: end; /* Forces the container to the end of the grid column */
+    margin-right: 20px;
+    margin-top: 40px;
+}   
+
+#main-screen h1 {
+    margin-left: 20px;
+    color: black;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
 }
 
-#main-screen header {
-    margin-top: 0; /* Abstand nach oben entfernen */
-    padding: 20px; /* Optional: Padding hinzufügen, wenn gewünscht */
-    text-align: center; /* Zentriere den Text */
+/** fuer spater input[type="submit"] **/
+#welcome-title .logout-button{
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    border: none;
+    background-color: red;
+    border: 2px solid darkred;
+    box-shadow: 0px 2px 2px black;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    font-size: 15px;
+    text-align: center; 
+    display: inline-block; 
+    line-height: 35px; 
+    text-decoration: none;
 }
 
-#main-screen header h2 {
-    color: #6B4226;
-    font-family:  sans-serif;
-    margin-bottom: 10px;
-    font-weight: 1500; /* Super dünn */
-    font-size: 20px; /* Schriftgröße anpassen, falls nötig */
-    text-shadow: none; /* Textschatten entfernen */
-
+#welcome-title .logout-button:hover {
+    background-color: darkred;
+    box-shadow: inset 2px 2px 2px darkred;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 16px;
 }
-
-#main-screen header h1, #main-screen header h3 {
-    color: #6B4226;
-    font-family: 'Alfa Slab One', sans-serif;
-    margin-bottom: 10px;
-    font-weight: 100; /* Super dünn */
-    font-size: 50px; /* Schriftgröße anpassen, falls nötig */
-    text-shadow: none; /* Textschatten entfernen */
-}
-
 
 #main-screen footer {
-    margin-top: 20px; /* Abstand oben hinzufügen */
+    margin-top: 5px; /* Abstand oben hinzufügen */
     position: absolute; /* Absolute Positionierung für den Footer */
-    bottom: 20px; /* Abstand vom unteren Rand */
+    bottom: 0px; /* Abstand vom unteren Rand */
     left: 0;
     right: 0; /* Footer zentriert */
     text-align: center; /* Text zentrieren */
     font-family: 'Open Sans', sans-serif; /* Schriftart für den Footer */
     font-size: 14px; /* Schriftgröße für den Footer */
     color: #333; /* Schriftfarbe für den Footer */
+    border-top: 4px solid #6B4226;
+}
+.main-container {
+    padding: 0 10px;
+    width: calc(100vw - 29px);
+    box-sizing: border-box; 
+    margin-bottom: 200px ;
 }
 
 #location-list {
-    width: 90%; /* Erhöhte Breite */
-    max-width: 600px; /* Maximalbreite anpassen, um mehr Platz zu bieten */
+    width: 100%; /* Erhöhte Breite */
+    height: 400px;
     background-color: #71BD9A; /* Hintergrundfarbe für die Liste */
-    padding: 40px; /* Erhöhtes Padding für mehr Innenabstand */
+    padding: 10px; /* Erhöhtes Padding für mehr Innenabstand */
     border-radius: 10px; /* Runde Ecken */
-    box-shadow: 0px 4px 10px #6B4226; /* Schatteneffekt */
-    margin: 20px; /* Liste zentrieren */
+    box-shadow: 0px 3px 3px #6B4226; /* Schatteneffekt */
+    border: 4px solid #6B4226;
+    overflow: auto; 
 }
 
+#location-list h2 {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: black;
+    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+}
+#location-list .update-button {
+    width: 80px;
+    height: 35px;
+    border-radius: 5px;
+    border: 2px solid darkred;
+    background-color: red;
+    box-shadow: 0px 2px 2px black;
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    line-height: 35px;
+    text-decoration: none; 
+}
 
-#location-list h3 {
-    color: #6B4226;
-    font-family: 'Alfa Slab One', sans-serif;
-    margin-bottom: 10px;
-    font-weight: 100; /* Super dünn */
-    font-size: 24px; /* Schriftgröße anpassen, falls nötig */
-    text-shadow: none; /* Textschatten entfernen */
+#location-list .update-button:hover {
+    background-color: darkred;
+    box-shadow: inset 2px 2px 2px darkred;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 16px;
 }
 
 #location-list ul {
     list-style-type: none; /* Remove default list style */
     padding: 0; /* Remove padding */
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 0;
 }
 
 #location-list button {
+    width: 100%;
+    height: 300px;
     background-color: #7e6188; /* Button background color */
     padding: 10px;
     margin: 5px 0;
@@ -341,8 +399,29 @@ input[type="checkbox"]:checked {
     text-align: center; /* Center text */
     cursor: pointer; /* Pointer cursor on hover */
     text-transform: uppercase; /* Uppercase text */
-    width: 100%; /* Full width of container */
     transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+}
+
+#location-list .add-button {
+
+    width: 91%;
+    height: 272px;
+    background-color: #7e6188; /* Button background color */
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 4px solid #6B4226; /* Button border color */
+    color: white; /* Button text color */
+    box-shadow: 2px 2px 2px #6B4226; /* Button shadow */
+    font-family: 'Open Sans', sans-serif; /* Font for buttons */
+    font-size: 18px; /* Font size for buttons */
+    text-align: center; /* Center text */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-transform: uppercase; /* Uppercase text */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
+    display: block; 
+    text-decoration: none; 
+    line-height: 265px;
 }
 
 #location-list button:hover {
@@ -351,31 +430,28 @@ input[type="checkbox"]:checked {
     color: #f2e5d7; /* Change text color on hover */
 }
 
-.button-container-main {
-    display: flex;
-    justify-content: center; /* Zentriert die Buttons */
-    gap: 10px; /* Abstand zwischen den Buttons */
-    margin-top: 20px; /* Abstand nach oben */
-    padding: 10px 0; /* Padding für mehr Platz */
-}
-
-
-.button-container-main .button {
-    padding: 10px 20px;
-    background-color: #7e6188; /* Button background color */
-    color: white; /* Button text color */
-    border-radius: 5px; /* Rounded corners */
-    text-decoration: none; /* No underline */
-    font-size: 16px; /* Font size for main buttons */
-    font-family: 'Alfa Slab One'; /* Font for buttons */
-    border: 4px solid #6b506f; /* Button border color */
-    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition */
-}
-
-.button-container-main .button:hover {
+#location-list .add-button:hover {
     background-color: #6b506f; /* Darker on hover */
     box-shadow: inset 2px 2px 2px #6b506f; /* Inner shadow on hover */
     color: #f2e5d7; /* Change text color on hover */
+}
+
+@media (max-width: 1200px) {
+    #location-list ul {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 800px) {
+    #location-list ul {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 400px) {
+    #location-list ul {
+        grid-template-columns: repeat(1, 1fr); 
+    }
 }
 
 footer {
@@ -383,7 +459,7 @@ footer {
     color: white; /* Schriftfarbe */
     display: flex; /* Flexbox aktivieren */
     justify-content: center; /* Buttons in der Mitte ausrichten */
-    padding: 30px; /* Padding für den Footer */
+    padding: 18px; /* Padding für den Footer */
     font-size: 18px; /* Schriftgröße im Footer */
     margin-top: auto; /* Footer nach unten schieben */
 }
@@ -395,17 +471,6 @@ footer a {
 
 footer a:hover {
     text-decoration: underline; /* Underline on hover */
-}
-
-#welcome-title {
-    background-color: #71BD9A; /* Grüner Hintergrund */
-    border: 4px solid #6B4226; /* Braune Umrandung */
-    border-radius: 5px; /* Abgerundete Ecken */
-    padding: 1px 15px; /* Innenabstand für eine kleinere Box */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Leichter Schatteneffekt */
-    margin: 20px auto; /* Abstand oben erhöhen und zentrieren */
-    width: fit-content; /* Größe an den Inhalt anpassen */
-    text-align: center; /* Zentrierter Text */
 }
 
 /* Add-Screen */
