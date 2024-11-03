@@ -7,19 +7,37 @@ body, html {
     overflow: hidden;  
 }
 
-
+/* Login Screen */
+#login-screen {
+    display: none;
+    position: fixed;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center; /* Horizontal center */
+    align-items: center; /* Vertical center */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
 
 #loginForm {
     border: 4px solid #6B4226;
     padding: 20px;
-    width: 300px; /* Form width */
+    width: 300px; 
     height: 400px;
-    background-color: #71BD9A; /* Background of the form */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #71BD9A;
+    border-radius: 10px;
     box-shadow: 0px 4px 10px #6B4226;
     z-index: 5; 
     align-items: center;
     position: relative;
+}
+
+#logo {
+    display: block;
+    margin-bottom: 20px;
+    margin-left: 25px;
+    width: 250px;
+    height: auto; 
 }
 
 #loginForm input[type="text"], #loginForm input[type="password"] {
@@ -35,7 +53,7 @@ body, html {
     border: 4px solid #6b506f;
     background-color: #7e6188;
     box-shadow: 0px 4px 10px black;
-    float: right; /* float right of form */
+    float: right; /* Float right side of form */
     color: white;
     text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black, 1px 1px 0 black;
     font-family: 'Alfa Slab One';
@@ -44,7 +62,7 @@ body, html {
 }
 
 #loginForm input[type="submit"]:hover {
-    background-color: #6b506f; /* Darker green on hover */
+    background-color: #6b506f; 
     box-shadow: inset 0px 3px 8px #6b506f;
 }
 
@@ -53,54 +71,13 @@ body, html {
     font-size: 18px;
     color: #e9e4d8;
     text-shadow: -1.5px -1.5px 0 #6B4226, 1.5px -1.5px 0 #6B4226, -1.5px 1.5px 0 #6B4226, 1.5px 1.5px 0 #6B4226; /* Black outline */
- } 
-
-#logo {
-    display: block;
-    margin-bottom: 20px;
-    margin-left: 25px;
-    width: 250px;
-    height: auto; 
-}
-
-#login-screen {
-    display: none;
-    position: fixed;
-    z-index: 4;
-    width: 100vw;
-    height: 100vh;
-    justify-content: center; /* Horizontal center */
-    align-items: center; /* Vertical center */
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  
-}
+} 
 
 #login-screen:target{
     display: flex;
 }
 
-.close-button {
-    position: absolute;
-    top: 7px;
-    right: 7px;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: red;
-    color: white;
-    text-align: center;
-    font-size: 20px;
-    text-decoration: none; /* remove underline on x */
-    line-height: 17px;
-    box-shadow: 0px 1px 4px black;
-    border: 2px solid darkred;
-}
-
-.close-button:hover {
-    background-color: darkred;
-    box-shadow: inset 0px 1px 4px darkred;
-}
-
+/* Update and Delete Screen Style */
 #update-delete-screen {
     display: none;
     position: fixed;
@@ -119,22 +96,46 @@ body, html {
 #updateScreen {
     border: 4px solid #6B4226;
     padding: 20px;
-    width: 80vw; /* Form width */
+    width: 80vw; 
     height: 80vw;
     max-width: 600px;
     max-height: 700px;
-    background-color: #71BD9A; /* Background of the form */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #71BD9A;
+    border-radius: 10px;
     box-shadow: 0px 4px 10px #6B4226;
     z-index: 5; 
     align-items: center;
     position: relative;
     display: flex;
     flex-direction: column;
-    overflow: auto; /*scrollbars if overflow of content like image size */
+    overflow: auto; /* Scrollbar if overflow of content */
 }
 
-/* using  https://www.scale.at/blog/responsive-form-layout-css-grid for css grid inspo */
+#updateIMG {
+    width: 200px;
+    height: 300px;
+    vertical-align: middle;
+    grid-column: 2;
+    margin-top: 25px;
+    border: 4px solid #6B4226;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
+
+#updateScreen .imageContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    #updateScreen .imageContainer {
+        grid-template-columns: 1fr;
+    }  
+}
+
+/* Using  https://www.scale.at/blog/responsive-form-layout-css-grid for css grid inspo */
 .updateForm {
     display: grid;
     gap: 8px;
@@ -149,91 +150,27 @@ body, html {
     font-size: 15px;
 }
 
+.updateForm label, .updateForm legend {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+} 
+
 @media screen and (min-width: 800px) {
     .updateForm {
         grid-template-columns: 1fr 2fr;
         gap: 24px;
-    }
-    
+    }    
 }
 
-.tagsContainer {
+#updateScreen .tagsContainer {
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 8px;
     border: 4px solid #6B4226;
     background-color: #f2e5d7;
     border-radius: 5px;
-}
-
-.updateForm fieldset {
-    grid-column: 1 / -1;
-}
-
-
-.buttonContainer, .uploadContainer {
-    display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 20px;
-    grid-column: 1/-1;
-}
-
-.buttonContainer input[type="submit"] {
-    width: 100%; 
-    border: 2px solid #6b506f;
-    background-color: #7e6188;
-    box-shadow: 0px 4px 10px black;
-    font-size: 15px;
-    border-radius: 5px;
-    border: 4px solid #6b506f;
-    background-color: #7e6188;
-    box-shadow: 2px 2px 2px black;
-    cursor: pointer;
-    text-transform: uppercase;
-    color: white;
-}
-
-.buttonContainer input[type="submit"]:hover {
-    background-color: #6b506f; /* Darker green on hover */
-    box-shadow: inset 2px 2px 2px #6b506f;
-    font-weight: bold;
-    color: #f2e5d7;
-    font-size: 18px;
-}
-
-#uploadButton {
-    grid-column: 3;
-    justify-self: end;
-    align-self: center; 
-    width: 80%;
-}
-
-#updateIMG {
-    width: 200px;
-    height: 300px;
-    vertical-align: middle;
-    grid-column: 2;
-    margin-top: 25px;
-    border: 4px solid #6B4226;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px black;
-}
-
-.imageContainer {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 800px) {
-    .imageContainer {
-        grid-template-columns: 1fr;
-    }  
-}
-
-.updateForm, .tagsContainer, .buttonContainer {
-    font-family: 'Open Sans', sans-serif;
 }
 
 input[type="checkbox"] {
@@ -263,7 +200,50 @@ input[type="checkbox"]:checked {
     text-align-last: center;
 }
 
+.updateForm fieldset {
+    grid-column: 1 / -1;
+}
 
+#uploadButton {
+    grid-column: 3;
+    justify-self: end;
+    align-self: center; 
+    width: 80%;
+}
+
+#updateScreen .buttonContainer, .uploadContainer {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    grid-column: 1/-1;
+}
+
+#updateScreen .buttonContainer input[type="submit"] {
+    width: 100%; 
+    border: 2px solid #6b506f;
+    background-color: #7e6188;
+    box-shadow: 0px 4px 10px black;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 4px solid #6b506f;
+    background-color: #7e6188;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: white;
+}
+
+#updateScreen .buttonContainer input[type="submit"]:hover {
+    background-color: #6b506f; 
+    box-shadow: inset 2px 2px 2px #6b506f;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 18px;
+}
+
+.updateForm, .tagsContainer, .buttonContainer {
+    font-family: 'Open Sans', sans-serif;
+}
 
 #main-screen {
     display: none;
@@ -298,7 +278,7 @@ input[type="checkbox"]:checked {
     font-weight: 1500; /* Super dünn */
     font-size: 20px; /* Schriftgröße anpassen, falls nötig */
     text-shadow: none; /* Textschatten entfernen */
-    
+
 }
 
 #main-screen header h1, #main-screen header h3 {
@@ -428,7 +408,7 @@ footer a:hover {
     text-align: center; /* Zentrierter Text */
 }
 
-/* Add-Screen Background Overlay */
+/* Add-Screen */
 #add-screen {
     display: none;
     position: fixed;
@@ -444,7 +424,6 @@ footer a:hover {
     display: flex;
 }
 
-/* Add-Screen Style */
 #addScreen {
     position: relative;
     border: 4px solid #6B4226;
@@ -461,6 +440,32 @@ footer a:hover {
     flex-direction: column;
     overflow: auto; /* Scrollbars for overflowing content like images */
     font-family: 'Open Sans', sans-serif; /* Setting font style same as Update screen */
+    align-items: center;
+}
+
+#previewIMG {
+    width: 200px;
+    height: 300px;
+    vertical-align: middle;
+    grid-column: 2;
+    margin-top: 25px;
+    border: 4px solid #6B4226;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+    background-color: white;
+}
+
+#addScreen .imageContainer {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    #addScreen .imageContainer {
+        grid-template-columns: 1fr;
+    }  
 }
 
 .addForm {
@@ -470,12 +475,34 @@ footer a:hover {
     margin-top: 25px;
 }
 
-.addForm input[type="text"],
-.addForm input[type="file"] {
+.addForm input[type="text"] {
     border: 4px solid #6B4226;
     background-color: #f2e5d7;
     border-radius: 5px;
     font-size: 15px;
+}
+
+.addForm label, .addForm legend {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+} 
+
+@media screen and (min-width: 800px) {
+    .addForm {
+        grid-template-columns: 1fr 2fr;
+        gap: 24px;
+    }   
+}
+
+#addScreen .tagsContainer {
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    border: 4px solid #6B4226;
+    background-color: #f2e5d7;
+    border-radius: 5px;
 }
 
 .addForm fieldset {
@@ -486,15 +513,15 @@ footer a:hover {
     margin-top: 10px;
 }
 
-.buttonContainer {
+#addScreen .buttonContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
     grid-column: 1/-1;
 }
 
-.buttonContainer input[type="submit"],
-.buttonContainer input[type="button"] {
+#addScreen .buttonContainer input[type="submit"],
+#addScreen .buttonContainer input[type="button"] {
     width: 100%;
     border: 2px solid #6b506f;
     background-color: #7e6188;
@@ -506,14 +533,15 @@ footer a:hover {
     color: white;
 }
 
-.buttonContainer input[type="submit"]:hover,
-.buttonContainer input[type="button"]:hover {
+#addScreen .buttonContainer input[type="submit"]:hover,
+#addScreen .buttonContainer input[type="button"]:hover {
     background-color: #6b506f;
     box-shadow: inset 2px 2px 2px #6b506f;
     font-weight: bold;
     color: #f2e5d7;
     font-size: 18px;
 }
+
 .close-button {
     position: absolute;
     top: 10px;
@@ -525,7 +553,7 @@ footer a:hover {
     color: white;
     text-align: center;
     font-size: 20px;
-    text-decoration: none; /* remove underline on x */
+    text-decoration: none; 
     line-height: 17px;
     box-shadow: 0px 1px 4px black;
     border: 2px solid darkred;
