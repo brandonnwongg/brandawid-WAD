@@ -352,6 +352,12 @@ input[type="checkbox"]:checked {
     width: calc(100vw - 29px);
     box-sizing: border-box; 
     margin-bottom: 150px ;
+    transition: filter 0.3s ease;
+}
+
+.main-container.blurred {
+    filter: blur(5px); /* Strong blur effect */
+    pointer-events: none; /* Prevent interaction with blurred content */
 }
 
 .upper-main-container {
