@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!isLoggedIn) {
         loginScreen.style.display = "flex"; // Show login overlay
         mainContainer.classList.add("blurred"); // Apply blur effect to main container
-        headerText.textContent = "Bitte Anmelden, um Inhalt zu sehen";
+        headerText.textContent = "Bitte Login, um Inhalt zu sehen";
     }
 
     // Handle login form submission
