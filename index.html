@@ -27,7 +27,7 @@
             <br/> <br/> <br/>
 
             <!--Login Button-->
-            <input type="submit" value="LOGIN"/>
+            <input type="submit" id="loginButton" value="LOGIN" />
         </form>
     </div>
 
@@ -35,7 +35,7 @@
     <div id="add-screen">
         <div id="addScreen">
             <!-- Close Button -->
-            <a href="#" class="close-button">&times;</a>
+            <a href="#" class="close-button-add">&times;</a>
             <h2>Neuen Standort hinzufügen</h2>
             <div id="imageContainer">
                 <!-- Empty Image Box -->
@@ -94,7 +94,7 @@
             <!-- Buttons -->
             <div class="buttonContainer">
                 <input type="submit" value="Save/Submit" />
-                <input type="button" value="Cancel" onclick="" />
+                <input type="button" id="closeButtonAddScreen"value="Cancel" onclick="" />
             </div>
             </form>
         </div>
@@ -168,7 +168,7 @@
             <div id="welcome-title">
                 <img src="improveBerlin.png" alt="project logo" id="logo-main" />
                     <div class="right-side-header">
-                        <input type="submit" value="LOGIN"/>
+                        <input type="submit" id="loginMainButton" value="LOGIN"/>
                     </div>
             </div>
         </header>
@@ -178,10 +178,10 @@
         <section id="location-list">
             <div class="upper-main-container">
             <h2>Standorte</h2>
-                <input type="submit" value=UPDATE/>
+                <!--<input type="submit" value="UPDATE"/>-->
             </div>
             <ul>
-                <li><button type="button">
+                <li><button type="button" id="firstLocation">
                     <strong>Location</strong>Hermanstraße<br><br>
                     <strong>Straße</strong>Hermanstr. 160<br><br>
                     <strong>PLZ</strong>12051<br><br>
@@ -202,7 +202,7 @@
                     <strong>Tags</strong>Other<br><br>
                     <strong>Subtags</strong>mangelhaft
                 </button></li>
-                <li><button type="button">Add</button></li>
+                <li><button type="button" id="adminAddButton">Add</button></li>
                 <!-- Füge hier weitere Standorte hinzu -->
             </ul>
         </section>
