@@ -79,6 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Add button for admin
     addButton.addEventListener("click", function () {
         if (currentUser && currentUser.role === "admin") {
+            resetAddForm();  // Reset the add form before showing
             addScreen.style.display = "flex"; // Show the Add screen
         } else {
             alert("You do not have permission to access this feature.");
@@ -94,6 +95,25 @@ document.addEventListener("DOMContentLoaded", function () {
     closeButtonAddUpper.addEventListener("click", function () {
         addScreen.style.display = "none";
     });
+
+    // Function to reset the Add form
+    function resetAddForm() {
+        const addForm = document.querySelector(".addForm");
+        addForm.reset();  // Reset all form fields
+
+        // Clear the image preview if any
+        const previewImage = document.getElementById("previewIMG");
+        previewImage.src = "";  // Clear image preview
+
+        // Deselect all checkboxes
+        const checkboxes = document.querySelectorAll("input[name='tags']");
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false;
+        });
+
+        // Reset the subtags dropdown
+        document.getElementById("subtags").value = "mangelhaft";  // Set default value
+    }
 
     // Handle Save/Submit button click in Add Screen
     const addForm = document.querySelector(".addForm");
@@ -127,6 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // Check if the location is in Berlin
                     if (address.city === "Berlin" || address.state === "Berlin") {
+                        const lat = parseFloat(data[0].lat).toFixed(8);  // Round latitude to 8 decimal places
+                        const lon = parseFloat(data[0].lon).toFixed(8);  // Round longitude to 8 decimal places
+
                         // Location exists and is in Berlin, proceed to add the location
                         const newLocation = document.createElement("li");
                         const newLocationButton = document.createElement("button");
@@ -137,7 +160,9 @@ document.addEventListener("DOMContentLoaded", function () {
                             <strong>Straße</strong> ${street}<br><br>
                             <strong>PLZ</strong> ${zip}<br><br>
                             <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
-                            <strong>Subtags</strong> ${subtag}
+                            <strong>Subtags</strong> ${subtag}<br><br>
+                            <strong>Latitude</strong> ${lat}<br><br>
+                            <strong>Longitude</strong> ${lon}
                         `;
 
                         newLocation.appendChild(newLocationButton);
@@ -181,6 +206,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Close the Update screen
     const closeButtonUpdate = updateDeleteScreen.querySelector(".close-button");
     closeButtonUpdate.addEventListener("click", function () {
-        updateDeleteScreen.style.display = "none"; // Hide the update screen
+        updateDeleteScreen.style.display = "none"; // Close the update screen
     });
 });
