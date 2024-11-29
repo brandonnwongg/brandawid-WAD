@@ -7,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const headerText = mainScreen.querySelector("h1");
     const addScreen = document.getElementById("add-screen");
     const addButton = document.getElementById("adminAddButton");
-    const updateButton = document.getElementById("updateButton");
     const updateDeleteScreen = document.getElementById("update-delete-screen");
 
     const locationList = document.getElementById("loaction-list");
@@ -19,10 +18,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let isLoggedIn = false;
     let currentUser = null;
+    let selectedLocation = null; // Variable to store the selected location details
 
     addButton.style.display = "none";
-    updateButton.style.display = "none"; // Initially hide the update button
-    updateDeleteScreen.style.display = "none"; // Hide the update screen initially
+    updateDeleteScreen.style.display = "none"; // Initially hide the update screen
 
     // Show the login screen and blur the main-container on page load
     if (!isLoggedIn) {
@@ -49,11 +48,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (user.role == "admin") {
                 headerText.textContent = "Willkommen zurück, Mina!";
                 addButton.style.display = "inline-block";
-                updateButton.style.display = "inline-block"; // Show the update button for admin
             } else if (user.role == "non-admin") {
                 headerText.textContent = "Willkommen zurück, Norman!";
                 addButton.style.display = "none";
-                updateButton.style.display = "none"; // Keep update button hidden for non-admin
             }
             loginButton.value = "LOGOUT";
         } else {
@@ -185,27 +182,46 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // Locations and Update button logic
-    const locationButtons = locationList.querySelectorAll("button");
+    // Locations logic: Open update screen when a location is clicked
+    locationList.addEventListener("click", function (event) {
+        if (event.target.tagName === "BUTTON") {
+            // Populate the update screen with the selected location details
+            selectedLocation = event.target; // Save the clicked location
+            const locationName = selectedLocation.querySelector("strong").nextSibling.textContent.trim();
+            const street = selectedLocation.querySelector("strong").nextSibling.nextSibling.nextSibling.nextSibling.textContent.trim();
 
-    locationButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            if (currentUser && currentUser.role === "admin") {
-                updateButton.style.display = "inline-block"; // Show update button for admin when a location is clicked
-            } else {
-                updateButton.style.display = "none"; // Hide update button for non-admin
+            updateDeleteScreen.querySelector("#locationName").value = locationName;
+            updateDeleteScreen.querySelector("#street").value = street;
+
+            // Show the update screen
+            updateDeleteScreen.style.display = "flex";
+        }
+    });
+
+    // Delete button logic
+    const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
+    deleteButton.addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the form submission
+
+        if (selectedLocation) {
+            // Remove the selected location from the list
+            selectedLocation.parentElement.removeChild(selectedLocation);
+
+            // Close the update screen
+            updateDeleteScreen.style.display = "none";
+
+            // Ensure the "Add" button is at the end of the list
+            const addButtonLi = locationList.querySelector("li:last-child");
+            if (addButtonLi) {
+                locationList.appendChild(addButtonLi); // Append the Add button again
             }
-        });
+        }
     });
 
-    // Handle the Update button click
-    updateButton.addEventListener("click", function () {
-        updateDeleteScreen.style.display = "flex"; // Show the update screen
-    });
-
-    // Close the Update screen
-    const closeButtonUpdate = updateDeleteScreen.querySelector(".close-button");
-    closeButtonUpdate.addEventListener("click", function () {
+    // Cancel button logic to close the update screen
+    const cancelButton = updateDeleteScreen.querySelector("input[value='cancel']");
+    cancelButton.addEventListener("click", function (event) {
+        event.preventDefault();
         updateDeleteScreen.style.display = "none"; // Close the update screen
     });
 });
