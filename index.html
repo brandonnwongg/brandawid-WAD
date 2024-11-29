@@ -93,7 +93,7 @@
         
             <!-- Buttons -->
             <div class="buttonContainer">
-                <input type="submit" value="Save/Submit" />
+                <input type="submit" value="Save/Submit" onclick="saveSubmit(event)"/>
                 <input type="button" id="closeButtonAddScreen"value="Cancel" onclick="" />
             </div>
             </form>
@@ -178,9 +178,10 @@
         <section id="location-list">
             <div class="upper-main-container">
             <h2>Standorte</h2>
-                <!--<input type="submit" value="UPDATE"/>-->
+            <input type="submit" value="UPDATE" id="updateButton" style="display: none;" />
             </div>
-            <ul>
+            
+            <ul id="loaction-list">
                 <li><button type="button" id="firstLocation">
                     <strong>Location</strong>Hermanstraße<br><br>
                     <strong>Straße</strong>Hermanstr. 160<br><br>

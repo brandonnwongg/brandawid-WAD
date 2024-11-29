@@ -1,12 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const loginScreen = document.getElementById("login-screen");
     const mainScreen = document.getElementById("main-screen");
-    const mainContainer = mainScreen.querySelector(".main-container"); 
+    const mainContainer = mainScreen.querySelector(".main-container");
     const loginForm = document.getElementById("loginForm");
     const loginButton = document.getElementById("loginMainButton");
-    const headerText = mainScreen.querySelector("h1"); 
+    const headerText = mainScreen.querySelector("h1");
     const addScreen = document.getElementById("add-screen");
     const addButton = document.getElementById("adminAddButton");
+    const updateButton = document.getElementById("updateButton");
+    const updateDeleteScreen = document.getElementById("update-delete-screen");
+
+    const locationList = document.getElementById("loaction-list");
 
     const users = [
         { username: "admina", password: "password", role: "admin", name: "Mina" },
@@ -17,6 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let currentUser = null;
 
     addButton.style.display = "none";
+    updateButton.style.display = "none"; // Initially hide the update button
+    updateDeleteScreen.style.display = "none"; // Hide the update screen initially
 
     // Show the login screen and blur the main-container on page load
     if (!isLoggedIn) {
@@ -27,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Handle login form submission
     loginForm.addEventListener("submit", function (event) {
-        event.preventDefault(); // Prevent default form submission
+        event.preventDefault();
 
         const username = document.getElementById("usernameID").value;
         const password = document.getElementById("passwordID").value;
@@ -35,17 +41,19 @@ document.addEventListener("DOMContentLoaded", function () {
         const user = users.find(u => u.username === username && u.password === password);
 
         if (user) {
-            isLoggedIn = true; 
+            isLoggedIn = true;
             loginScreen.style.display = "none";
-            mainContainer.classList.remove("blurred"); // Remove blur effect
+            mainContainer.classList.remove("blurred");
             currentUser = user;
 
             if (user.role == "admin") {
-            headerText.textContent = "Willkommen zurück, Mina!";
-            addButton.style.display = "inline-block";
+                headerText.textContent = "Willkommen zurück, Mina!";
+                addButton.style.display = "inline-block";
+                updateButton.style.display = "inline-block"; // Show the update button for admin
             } else if (user.role == "non-admin") {
-            headerText.textContent = "Willkommen zurück, Norman!";
-            addButton.style.display = "none";
+                headerText.textContent = "Willkommen zurück, Norman!";
+                addButton.style.display = "none";
+                updateButton.style.display = "none"; // Keep update button hidden for non-admin
             }
             loginButton.value = "LOGOUT";
         } else {
@@ -68,31 +76,83 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    //Add button for admin
+    // Add button for admin
     addButton.addEventListener("click", function () {
-        console.log("Add button clicked. Current user:", currentUser);
         if (currentUser && currentUser.role === "admin") {
             addScreen.style.display = "flex"; // Show the Add screen
-            console.log("Add screen shown");
         } else {
             alert("You do not have permission to access this feature.");
         }
     });
 
     // Close the Add screen
-    const closeButtonAdd = document.getElementById("closeButtonAddScreen")
+    const closeButtonAdd = document.getElementById("closeButtonAddScreen");
     const closeButtonAddUpper = addScreen.querySelector(".close-button-add");
     closeButtonAdd.addEventListener("click", function () {
         addScreen.style.display = "none";
-        console.log("Add screen closed");
     });
     closeButtonAddUpper.addEventListener("click", function () {
         addScreen.style.display = "none";
-        console.log("Add screen closed");
     });
 
-    const firstLocationButton = document.getElementById("firstLocation");
-    const updateDeleteScreen = document.getElementById("update-delete-screen");
-    const closeButtonFirstLocation = updateDeleteScreen.querySelector(".close-button");
+    // Handle Save/Submit button click in Add Screen
+    const addForm = document.querySelector(".addForm");
+    addForm.addEventListener("submit", function (event) {
+        event.preventDefault(); // Prevent form from refreshing the page
 
+        // Get the values from the form
+        const locationName = document.getElementById("locationName").value;
+        const street = document.getElementById("street").value;
+        const zip = document.getElementById("zip").value;
+        const city = document.getElementById("city").value;
+        const description = document.getElementById("description").value;
+
+        // Get selected tags
+        const selectedTags = Array.from(document.querySelectorAll("input[name='tags']:checked")).map(tag => tag.value);
+
+        // Get selected subtag
+        const subtag = document.getElementById("subtags").value;
+
+        // Create new list item for the location
+        const newLocation = document.createElement("li");
+        const newLocationButton = document.createElement("button");
+        newLocationButton.type = "button";
+
+        newLocationButton.innerHTML = `
+            <strong>Location</strong> ${locationName}<br><br>
+            <strong>Straße</strong> ${street}<br><br>
+            <strong>PLZ</strong> ${zip}<br><br>
+            <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
+            <strong>Subtags</strong> ${subtag}
+        `;
+
+        newLocation.appendChild(newLocationButton);
+        locationList.insertBefore(newLocation, locationList.lastElementChild); // Insert before the 'Add' button
+
+        addScreen.style.display = "none"; // Close the Add screen after submission
+    });
+
+    // Locations and Update button logic
+    const locationButtons = locationList.querySelectorAll("button");
+
+    locationButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            if (currentUser && currentUser.role === "admin") {
+                updateButton.style.display = "inline-block"; // Show update button for admin when a location is clicked
+            } else {
+                updateButton.style.display = "none"; // Hide update button for non-admin
+            }
+        });
+    });
+
+    // Handle the Update button click
+    updateButton.addEventListener("click", function () {
+        updateDeleteScreen.style.display = "flex"; // Show the update screen
+    });
+
+    // Close the Update screen
+    const closeButtonUpdate = updateDeleteScreen.querySelector(".close-button");
+    closeButtonUpdate.addEventListener("click", function () {
+        updateDeleteScreen.style.display = "none"; // Hide the update screen
+    });
 });
