@@ -30,33 +30,41 @@ document.addEventListener("DOMContentLoaded", function () {
         headerText.textContent = "Bitte Login";
     }
 
-    // Handle login form submission
     loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
-
+    
         const username = document.getElementById("usernameID").value;
         const password = document.getElementById("passwordID").value;
-
+    
         const user = users.find(u => u.username === username && u.password === password);
-
+    
         if (user) {
             isLoggedIn = true;
             loginScreen.style.display = "none";
             mainContainer.classList.remove("blurred");
             currentUser = user;
-
+    
+            const updateButton = updateDeleteScreen.querySelector("input[value='update']");
+            const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
+    
             if (user.role == "admin") {
                 headerText.textContent = "Willkommen zurück, Mina!";
-                addButton.style.display = "inline-block";
+                addButton.style.display = "inline-block"; // Zeigt den Add-Button für Admin an
+                updateButton.style.display = "inline-block"; // Zeigt den Update-Button für Admin an
+                deleteButton.style.display = "inline-block"; // Zeigt den Delete-Button für Admin an
             } else if (user.role == "non-admin") {
                 headerText.textContent = "Willkommen zurück, Norman!";
-                addButton.style.display = "none";
+                addButton.style.display = "none"; // Versteckt den Add-Button für non-admin
+                updateButton.style.display = "none"; // Versteckt den Update-Button für non-admin
+                deleteButton.style.display = "none"; // Versteckt den Delete-Button für non-admin
             }
+    
             loginButton.value = "LOGOUT";
         } else {
             alert("Wrong username/password. Try again");
         }
     });
+    
 
     loginButton.addEventListener("click", function (event) {
         if (isLoggedIn && loginButton.value === "LOGOUT") {
@@ -294,3 +302,4 @@ updateButton.addEventListener("click", function (event) {
         updateDeleteScreen.style.display = "none"; // Close the update screen
     });
 });
+
