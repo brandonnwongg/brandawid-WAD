@@ -113,23 +113,51 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get selected subtag
         const subtag = document.getElementById("subtags").value;
 
-        // Create new list item for the location
-        const newLocation = document.createElement("li");
-        const newLocationButton = document.createElement("button");
-        newLocationButton.type = "button";
+        // Construct the address to search via Geocoding API
+        const fullAddress = `${street}, ${city}, ${zip}`;
 
-        newLocationButton.innerHTML = `
-            <strong>Location</strong> ${locationName}<br><br>
-            <strong>Straße</strong> ${street}<br><br>
-            <strong>PLZ</strong> ${zip}<br><br>
-            <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
-            <strong>Subtags</strong> ${subtag}
-        `;
+        // Geocoding request to Nominatim API
+        const geocodingUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullAddress)}&addressdetails=1`;
 
-        newLocation.appendChild(newLocationButton);
-        locationList.insertBefore(newLocation, locationList.lastElementChild); // Insert before the 'Add' button
+        fetch(geocodingUrl)
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.length > 0 && data[0].address && data[0].address.postcode === zip) {
+                    const address = data[0].address;
 
-        addScreen.style.display = "none"; // Close the Add screen after submission
+                    // Check if the location is in Berlin
+                    if (address.city === "Berlin" || address.state === "Berlin") {
+                        // Location exists and is in Berlin, proceed to add the location
+                        const newLocation = document.createElement("li");
+                        const newLocationButton = document.createElement("button");
+                        newLocationButton.type = "button";
+
+                        newLocationButton.innerHTML = `
+                            <strong>Location</strong> ${locationName}<br><br>
+                            <strong>Straße</strong> ${street}<br><br>
+                            <strong>PLZ</strong> ${zip}<br><br>
+                            <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
+                            <strong>Subtags</strong> ${subtag}
+                        `;
+
+                        newLocation.appendChild(newLocationButton);
+                        locationList.insertBefore(newLocation, locationList.lastElementChild); // Insert before the 'Add' button
+
+                        addScreen.style.display = "none"; // Close the Add screen after submission
+                    } else {
+                        // Location is not in Berlin, show error
+                        alert("Die angegebene Location muss in Berlin liegen. Andere Bundesländer werden nicht akzeptiert.");
+                    }
+                } else {
+                    // Location does not exist or postcode mismatch, show error
+                    alert("Die angegebene Location konnte nicht gefunden werden oder die PLZ stimmt nicht überein. Bitte überprüfen Sie die Adresse.");
+                }
+            })
+            .catch(error => {
+                // Error occurred in fetching geocoding data
+                console.error("Fehler bei der Geocoding-Anfrage:", error);
+                alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+            });
     });
 
     // Locations and Update button logic
