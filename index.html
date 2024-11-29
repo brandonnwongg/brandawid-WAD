@@ -100,67 +100,81 @@
         </div>
     </div>
 
-     <!--Update and Delete Screen-->
-     <div id ="update-delete-screen">
-        <div id="updateScreen">
-            <a href="#" class="close-button">&times;</a>
-            <div id="imageContainer">
-                <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>    
+     <!-- Update and Delete Screen -->
+<div id="update-delete-screen">
+    <div id="updateScreen">
+        <a href="#" class="close-button">&times;</a>
+        <div id="imageContainer">
+            <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>
+        </div>
+        <form class="updateForm" action="" method="POST">
+
+            <!-- Name of location -->
+            <label for="location">LOCATION </label>
+            <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
+            
+            <!-- Issue -->
+            <label for="description">DESCRIPTION</label>
+            <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
+            
+            <!-- Street & No. -->
+            <label for="street">STREET & NO. </label>
+            <input type="text" id="street" name="street" value="Hermanstr. 160" required />
+            
+            <!-- ZIP -->
+            <label for="zip">ZIP </label>
+            <input type="text" id="zip" name="zip" value="12051" required />
+            
+            <!-- City -->
+            <label for="city">CITY</label>
+            <input type="text" id="city" name="city" value="Berlin" required />
+
+            <!-- Longitude and Latitude (readonly) -->
+            <label for="longitude">LONGITUDE</label>
+            <input type="text" id="longitude" name="longitude" readonly />
+            
+            <label for="latitude">LATITUDE</label>
+            <input type="text" id="latitude" name="latitude" readonly />
+            
+            <!-- Tags -->
+            <fieldset class="tagsContainer">
+                <legend>TAGS</legend>
+                <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
+                <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
+                <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
+                <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
+                <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
+                <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
+                <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
+                <label><input type="checkbox" name="tags" value="Other"> Other</label>
+                <label for="subtags">SUBTAGS</label>
+                <select id="subtags" name="subtags">
+                    <option value="mangelhaft">mangelhaft</option>
+                    <option value="beschädigt">beschädigt</option>
+                    <option value="fehlt">fehlt</option>
+                    <option value="in Arbeit">in Arbeit</option>
+                </select>
+            </fieldset>
+            
+            <div class="uploadContainer">
+                <label for="uploadButton">Upload Image</label>
+                <input type="file" id="uploadButton" name="uploadButton" />
             </div>
-            <form class="updateForm" action="" method="POST">
 
-                <!-- name of location-->
-                <label for="location">LOCATION </label>
-                <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
-                <!-- issue -->
-                <label for="description">DESCRIPTION</label>
-                <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
-                <!-- Street & No. -->
-                <label for="street">STREET & NO. </label>
-                <input type="text" id="street" name="street" value="Hermanstr. 160" required />
-                <!-- ZIP -->
-                <label for="zip">ZIP </label>
-                <input type="text" id="zip" name="zip" value="12051" required />
-                <!-- city -->
-                <label for="city">CITY</label>
-                <input type="text" id="city" name="city" value="Berlin" required />
-
-                <!-- Tags -->
-                <fieldset class="tagsContainer">
-                    <legend>TAGS</legend>
-                    <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
-                    <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
-                    <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
-                    <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
-                    <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
-                    <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
-                    <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
-                    <label><input type="checkbox" name="tags" value="Other"> Other</label>
-                    <label for="subtags">SUBTAGS</label>
-                    <select id="subtags" name="subtags">
-                        <option value="mangelhaft">mangelhaft</option>
-                        <option value="beschädigt">beschädigt</option>
-                        <option value="fehlt">fehlt</option>
-                        <option value="in Arbeit">in Arbeit</option>
-                    </select>
-                </fieldset>
-                <div class="uploadContainer">
-                    <label for="uploadButton">Upload Image</label>
-                    <input type="file" id="uploadButton" name="uploadButton" />
-                </div>
-                <div class="buttonContainer">
-                <!--Update Button-->
+            <div class="buttonContainer">
+                <!-- Update Button -->
                 <input type="submit" value="update"/>
 
-                <!--Delete Button-->
+                <!-- Delete Button -->
                 <input type="submit" value="delete"/>
 
-                <!--Cancel button-->
+                <!-- Cancel button -->
                 <input type="submit" value="cancel"/>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
+
 
     
     <div id="main-screen">

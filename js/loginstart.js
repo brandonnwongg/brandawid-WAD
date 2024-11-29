@@ -182,43 +182,112 @@ document.addEventListener("DOMContentLoaded", function () {
             });
     });
 
-    // Locations logic: Open update screen when a location is clicked
-    locationList.addEventListener("click", function (event) {
-        if (event.target.tagName === "BUTTON") {
-            // Populate the update screen with the selected location details
-            selectedLocation = event.target; // Save the clicked location
-            const locationName = selectedLocation.querySelector("strong").nextSibling.textContent.trim();
-            const street = selectedLocation.querySelector("strong").nextSibling.nextSibling.nextSibling.nextSibling.textContent.trim();
+// Locations logic: Open update screen when a location is clicked
+locationList.addEventListener("click", function (event) {
+    if (event.target.tagName === "BUTTON") {
+        // Save the clicked location to the selectedLocation variable
+        selectedLocation = event.target;
 
-            updateDeleteScreen.querySelector("#locationName").value = locationName;
-            updateDeleteScreen.querySelector("#street").value = street;
+        // Extract the location details from the selected location
+        const locationName = selectedLocation.querySelector("strong").nextSibling.textContent.trim();
+        const street = selectedLocation.querySelector("strong:nth-of-type(2)").nextSibling.textContent.trim();
+        const zip = selectedLocation.querySelector("strong:nth-of-type(3)").nextSibling.textContent.trim();
+        const tags = selectedLocation.querySelector("strong:nth-of-type(4)").nextSibling.textContent.trim().split(", ");
+        const subtag = selectedLocation.querySelector("strong:nth-of-type(5)").nextSibling.textContent.trim();
+        const latitude = selectedLocation.querySelector("strong:nth-of-type(6)").nextSibling.textContent.trim();
+        const longitude = selectedLocation.querySelector("strong:nth-of-type(7)").nextSibling.textContent.trim();
 
-            // Show the update screen
-            updateDeleteScreen.style.display = "flex";
-        }
-    });
+        // Populate the update screen with the selected location details
+        updateDeleteScreen.querySelector("#locationName").value = locationName;
+        updateDeleteScreen.querySelector("#street").value = street;
+        updateDeleteScreen.querySelector("#zip").value = zip;
+        updateDeleteScreen.querySelector("#city").value = "Berlin"; // Since city is fixed as "Berlin"
+        updateDeleteScreen.querySelector("#description").value = ""; // Empty by default, can be adjusted
+        updateDeleteScreen.querySelector("#subtags").value = subtag;
 
+        // Populate longitude and latitude as readonly
+        updateDeleteScreen.querySelector("#longitude").value = longitude;
+        updateDeleteScreen.querySelector("#latitude").value = latitude;
+
+        // Populate tags checkboxes
+        const checkboxes = updateDeleteScreen.querySelectorAll("input[name='tags']");
+        checkboxes.forEach(checkbox => {
+            if (tags.includes(checkbox.value)) {
+                checkbox.checked = true;
+            } else {
+                checkbox.checked = false;
+            }
+        });
+
+        // Show the update screen
+        updateDeleteScreen.style.display = "flex";
+    }
+});
+
+
+
+// Update button logic
+const updateButton = updateDeleteScreen.querySelector("input[value='update']");
+updateButton.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    // Perform the Geocoding update process
+    const locationName = updateDeleteScreen.querySelector("#locationName").value;
+    const street = updateDeleteScreen.querySelector("#street").value;
+    const zip = updateDeleteScreen.querySelector("#zip").value;
+    const city = updateDeleteScreen.querySelector("#city").value;
+    const description = updateDeleteScreen.querySelector("#description").value; // Description
+    const subtag = updateDeleteScreen.querySelector("#subtags").value; // Subtag
+
+    // Get selected tags
+    const selectedTags = Array.from(updateDeleteScreen.querySelectorAll("input[name='tags']:checked")).map(tag => tag.value);
+
+    const fullAddress = `${street}, ${city}, ${zip}`;
+
+    const geocodingUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(fullAddress)}&addressdetails=1`;
+
+    fetch(geocodingUrl)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.length > 0 && data[0].address && data[0].address.postcode === zip) {
+                const address = data[0].address;
+                if (address.city === "Berlin" || address.state === "Berlin") {
+                    const lat = parseFloat(data[0].lat).toFixed(8);
+                    const lon = parseFloat(data[0].lon).toFixed(8);
+
+                    // Update the location in the list
+                    selectedLocation.innerHTML = `
+                        <strong>Location</strong> ${locationName}<br><br>
+                        <strong>Straße</strong> ${street}<br><br>
+                        <strong>PLZ</strong> ${zip}<br><br>
+                        <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
+                        <strong>Subtags</strong> ${subtag}<br><br>
+                        <strong>Latitude</strong> ${lat}<br><br>
+                        <strong>Longitude</strong> ${lon}
+                    `;
+                    updateDeleteScreen.style.display = "none"; // Close the update screen after updating
+                } else {
+                    alert("Die angegebene Location muss in Berlin liegen. Andere Bundesländer werden nicht akzeptiert.");
+                }
+            } else {
+                alert("Die angegebene Location konnte nicht gefunden werden oder die PLZ stimmt nicht überein. Bitte überprüfen Sie die Adresse.");
+            }
+        })
+        .catch(error => {
+            console.error("Fehler bei der Geocoding-Anfrage:", error);
+            alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
+        });
+});
     // Delete button logic
     const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
     deleteButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent the form submission
+        event.preventDefault(); // Prevent form from submitting
 
-        if (selectedLocation) {
-            // Remove the selected location from the list
-            selectedLocation.parentElement.removeChild(selectedLocation);
-
-            // Close the update screen
-            updateDeleteScreen.style.display = "none";
-
-            // Ensure the "Add" button is at the end of the list
-            const addButtonLi = locationList.querySelector("li:last-child");
-            if (addButtonLi) {
-                locationList.appendChild(addButtonLi); // Append the Add button again
-            }
-        }
+        selectedLocation.remove(); // Remove the location from the list
+        updateDeleteScreen.style.display = "none"; // Close the update screen
     });
 
-    // Cancel button logic to close the update screen
+    // Cancel button logic
     const cancelButton = updateDeleteScreen.querySelector("input[value='cancel']");
     cancelButton.addEventListener("click", function (event) {
         event.preventDefault();
