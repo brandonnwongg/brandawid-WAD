@@ -7,6 +7,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const headerText = mainScreen.querySelector("h1"); 
     const addScreen = document.getElementById("add-screen");
     const addButton = document.getElementById("adminAddButton");
+    const firstLocationButton = document.getElementById("firstLocation");
+
 
     const users = [
         { username: "admina", password: "password", role: "admin", name: "Mina" },
@@ -91,8 +93,19 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Add screen closed");
     });
 
-    const firstLocationButton = document.getElementById("firstLocation");
     const updateDeleteScreen = document.getElementById("update-delete-screen");
-    const closeButtonFirstLocation = updateDeleteScreen.querySelector(".close-button");
+    const closeButtonFirstLocation = document.getElementById("closeButtonFirstLocation");
+   
+    // Show update-delete screen when the firstLocationButton is clicked
+    firstLocationButton.addEventListener("click", function () {
+        updateDeleteScreen.style.display = "flex"; // Show the update/delete screen
+        console.log("Update/Delete screen shown for first location.");
+    });
+
+    // Close the update-delete screen
+    closeButtonFirstLocation.addEventListener("click", function () {
+        updateDeleteScreen.style.display = "none"; // Hide the update/delete screen
+        console.log("Update/Delete screen closed via Cancel button.");
+    });
 
 });

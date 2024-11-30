@@ -263,6 +263,28 @@ input[type="checkbox"]:checked {
     font-size: 18px;
 }
 
+#updateScreen .buttonContainer input[type="button"] {
+    width: 100%; 
+    border: 2px solid #6b506f;
+    background-color: #7e6188;
+    box-shadow: 0px 4px 10px black;
+    font-size: 15px;
+    border-radius: 5px;
+    border: 4px solid #6b506f;
+    background-color: #7e6188;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: white;
+}
+
+#updateScreen .buttonContainer input[type="button"]:hover {
+    background-color: #6b506f; 
+    box-shadow: inset 2px 2px 2px #6b506f;
+    font-weight: bold;
+    color: #f2e5d7;
+    font-size: 18px;
+}
 .updateForm, .tagsContainer, .buttonContainer {
     font-family: 'Open Sans', sans-serif;
 }
@@ -667,5 +689,3 @@ footer a:hover {
     background-color: darkred;
     box-shadow: inset 0px 1px 4px darkred;
 }
-
-
