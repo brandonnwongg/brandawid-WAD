@@ -27,7 +27,7 @@
             <br/> <br/> <br/>
 
             <!--Login Button-->
-            <input type="submit" value="LOGIN"/>
+            <input type="submit" id="loginButton" value="LOGIN" />
         </form>
     </div>
 
@@ -35,7 +35,7 @@
     <div id="add-screen">
         <div id="addScreen">
             <!-- Close Button -->
-            <a href="#" class="close-button">&times;</a>
+            <a href="#" class="close-button-add">&times;</a>
             <h2>Neuen Standort hinzufügen</h2>
             <div id="imageContainer">
                 <!-- Empty Image Box -->
@@ -93,74 +93,87 @@
         
             <!-- Buttons -->
             <div class="buttonContainer">
-                <input type="submit" value="Save/Submit" />
-                <input type="button" value="Cancel" onclick="" />
+                <input type="submit" value="Save/Submit" onclick="saveSubmit(event)"/>
+                <input type="button" id="closeButtonAddScreen"value="Cancel" onclick="" />
             </div>
             </form>
         </div>
     </div>
 
-     <!--Update and Delete Screen-->
-     <div id ="update-delete-screen">
-        <div id="updateScreen">
-            <a href="#" class="close-button">&times;</a>
-            <div id="imageContainer">
-                <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>    
+     <!-- Update and Delete Screen -->
+<div id="update-delete-screen">
+    <div id="updateScreen">
+        <div id="imageContainer">
+            <img src="hermanstrasse.png" alt="updateIMG" id="updateIMG"/>
+        </div>
+        <form class="updateForm" action="" method="POST">
+
+            <!-- Name of location -->
+            <label for="location">LOCATION </label>
+            <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
+            
+            <!-- Issue -->
+            <label for="description">DESCRIPTION</label>
+            <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
+            
+            <!-- Street & No. -->
+            <label for="street">STREET & NO. </label>
+            <input type="text" id="street" name="street" value="Hermanstr. 160" required />
+            
+            <!-- ZIP -->
+            <label for="zip">ZIP </label>
+            <input type="text" id="zip" name="zip" value="12051" required />
+            
+            <!-- City -->
+            <label for="city">CITY</label>
+            <input type="text" id="city" name="city" value="Berlin" required />
+
+            <!-- Longitude and Latitude (readonly) -->
+            <label for="longitude">LONGITUDE</label>
+            <input type="text" id="longitude" name="longitude" readonly />
+            
+            <label for="latitude">LATITUDE</label>
+            <input type="text" id="latitude" name="latitude" readonly />
+            
+            <!-- Tags -->
+            <fieldset class="tagsContainer">
+                <legend>TAGS</legend>
+                <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
+                <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
+                <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
+                <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
+                <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
+                <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
+                <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
+                <label><input type="checkbox" name="tags" value="Other"> Other</label>
+                <label for="subtags">SUBTAGS</label>
+                <select id="subtags" name="subtags">
+                    <option value="mangelhaft">mangelhaft</option>
+                    <option value="beschädigt">beschädigt</option>
+                    <option value="fehlt">fehlt</option>
+                    <option value="in Arbeit">in Arbeit</option>
+                </select>
+            </fieldset>
+            
+            <div class="uploadContainer">
+                <label for="uploadButton">Upload Image</label>
+                <input type="file" id="uploadButton" name="uploadButton" />
             </div>
-            <form class="updateForm" action="" method="POST">
 
-                <!-- name of location-->
-                <label for="location">LOCATION </label>
-                <input type="text" id="locationName" name="locationName" value="S-Bahn Hermanstraße" required/>
-                <!-- issue -->
-                <label for="description">DESCRIPTION</label>
-                <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
-                <!-- Street & No. -->
-                <label for="street">STREET & NO. </label>
-                <input type="text" id="street" name="street" value="Hermanstr. 160" required />
-                <!-- ZIP -->
-                <label for="zip">ZIP </label>
-                <input type="text" id="zip" name="zip" value="12051" required />
-                <!-- city -->
-                <label for="city">CITY</label>
-                <input type="text" id="city" name="city" value="Berlin" required />
-
-                <!-- Tags -->
-                <fieldset class="tagsContainer">
-                    <legend>TAGS</legend>
-                    <label><input type="checkbox" name="tags" value="Fußgängerweg"> Fußgängerweg</label>
-                    <label><input type="checkbox" name="tags" value="ÖPNV"> ÖPNV</label>
-                    <label><input type="checkbox" name="tags" value="Radweg"> Radweg</label>
-                    <label><input type="checkbox" name="tags" value="Baustelle"> Baustelle</label>
-                    <label><input type="checkbox" name="tags" value="Verschmutzung"> Verschmutzung</label>
-                    <label><input type="checkbox" name="tags" value="Grünfläche"> Grünfläche</label>
-                    <label><input type="checkbox" name="tags" value="Park & Ride"> Park & Ride</label>
-                    <label><input type="checkbox" name="tags" value="Other"> Other</label>
-                    <label for="subtags">SUBTAGS</label>
-                    <select id="subtags" name="subtags">
-                        <option value="mangelhaft">mangelhaft</option>
-                        <option value="beschädigt">beschädigt</option>
-                        <option value="fehlt">fehlt</option>
-                        <option value="in Arbeit">in Arbeit</option>
-                    </select>
-                </fieldset>
-                <div class="uploadContainer">
-                    <label for="uploadButton">Upload Image</label>
-                    <input type="file" id="uploadButton" name="uploadButton" />
-                </div>
-                <div class="buttonContainer">
-                <!--Update Button-->
+            <div class="buttonContainer">
+                <!-- Update Button -->
                 <input type="submit" value="update"/>
 
-                <!--Delete Button-->
+                <!-- Delete Button -->
                 <input type="submit" value="delete"/>
 
-                <!--Cancel button-->
+                <!-- Cancel button -->
                 <input type="submit" value="cancel"/>
             </div>
-            </form>
-        </div>
+        </form>
     </div>
+</div>
+
 
     
     <div id="main-screen">
@@ -168,7 +181,7 @@
             <div id="welcome-title">
                 <img src="improveBerlin.png" alt="project logo" id="logo-main" />
                     <div class="right-side-header">
-                        <input type="submit" value="LOGIN"/>
+                        <input type="submit" id="loginMainButton" value="LOGIN"/>
                     </div>
             </div>
         </header>
@@ -178,31 +191,41 @@
         <section id="location-list">
             <div class="upper-main-container">
             <h2>Standorte</h2>
-                <input type="submit" value=UPDATE/>
+            <input type="submit" value="UPDATE" id="updateButton" style="display: none;" />
             </div>
-            <ul>
-                <li><button type="button">
-                    <strong>Location</strong>Hermanstraße<br><br>
-                    <strong>Straße</strong>Hermanstr. 160<br><br>
-                    <strong>PLZ</strong>12051<br><br>
-                    <strong>Tags</strong>ÖPNV<br><br>
-                    <strong>Subtags</strong>beschädigt
+            
+            <ul id="loaction-list">
+                <li><button type="button" id="firstLocation">
+                    <img src="hermanstrasse.png" alt="Hermannstraße Image"><br>
+                    <strong>Location</strong>S-Hermannstraße<br>
+                    <strong>Straße</strong>Hermannstraße 160<br>
+                    <strong>PLZ</strong>12051<br>
+                    <strong>Tags</strong>ÖPNV<br>
+                    <strong>Subtags</strong>beschädigt<br>
+                    <strong>Longitude</strong>52.46832300<br>
+                    <strong>Latitude</strong>13.4310789
                 </button></li>
                 <li><button type="button">
-                    <strong>Location</strong>Adlershof<br><br>
-                    <strong>Straße</strong>Abramstr. 18<br><br>
-                    <strong>PLZ</strong>12489<br><br>
-                    <strong>Tags</strong>Fußgängerweg<br><br>
-                    <strong>Subtags</strong>in Arbeit
+                    <img src="fus.png" alt="Adlershof Image"><br>
+                    <strong>Location</strong>Adlershof<br>
+                    <strong>Straße</strong>Abram-Joffe-straße 18<br>
+                    <strong>PLZ</strong>12489<br>
+                    <strong>Tags</strong>Fußgängerweg<br>
+                    <strong>Subtags</strong>in Arbeit<br>
+                    <strong>Longitude</strong>52.43268675<br>
+                    <strong>Latitude</strong>13.527660356
                 </button></li>
                 <li><button type="button">
-                    <strong>Location</strong>Kaufland<br><br>
-                    <strong>Straße</strong>Rudowerstr. 12<br><br>
-                    <strong>PLZ</strong>12489<br><br>
-                    <strong>Tags</strong>Other<br><br>
-                    <strong>Subtags</strong>mangelhaft
+                    <img src="kaufland.png" alt="Kaufland Image"><br>
+                    <strong>Location</strong>Kaufland<br>
+                    <strong>Straße</strong>Rudowerstraße 12<br>
+                    <strong>PLZ</strong>12351<br>
+                    <strong>Tags</strong>Other<br>
+                    <strong>Subtags</strong>mangelhaft<br>
+                    <strong>Longitude</strong>52.4416953<br>
+                    <strong>Latitude</strong>13.45678908
                 </button></li>
-                <li><button type="button">Add</button></li>
+                <li><button type="button" id="adminAddButton">Add</button></li>
                 <!-- Füge hier weitere Standorte hinzu -->
             </ul>
         </section>

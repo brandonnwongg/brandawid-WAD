@@ -419,7 +419,7 @@ input[type="checkbox"]:checked {
 
 #location-list button {
     width: 100%;
-    height: 300px;
+    height: 310px;
     background-color: #7e6188; /* Button background color */
     padding: 10px;
     margin: 5px 0;
@@ -428,7 +428,7 @@ input[type="checkbox"]:checked {
     color: white; /* Button text color */
     box-shadow: 2px 2px 2px #6B4226; /* Button shadow */
     font-family: 'Open Sans', sans-serif; /* Font for buttons */
-    font-size: 18px; /* Font size for buttons */
+    font-size: 15px; /* Font size for buttons */
     cursor: pointer; /* Pointer cursor on hover */
     text-transform: uppercase; /* Uppercase text */
     text-align: left;
@@ -477,11 +477,17 @@ input[type="checkbox"]:checked {
     #location-list ul {
         grid-template-columns: repeat(3, 1fr);
     }
+    #location-list button {
+        height: 340px; /* Increase height by 10px */
+    }
 }
 
 @media (max-width: 800px) {
     #location-list ul {
         grid-template-columns: repeat(2, 1fr); 
+    }
+    #location-list button {
+        height: 340px; /* Increase height by 10px */
     }
 }
 
@@ -489,7 +495,12 @@ input[type="checkbox"]:checked {
     #location-list ul {
         grid-template-columns: repeat(1, 1fr); 
     }
+    #location-list button {
+        height: 340px; /* Increase height by 10px */
+    }
 }
+
+
 
 footer {
     background-color: #71BD9A; /* Footer Hintergrundfarbe */
@@ -644,7 +655,7 @@ footer a:hover {
     font-size: 18px;
 }
 
-.close-button {
+.close-button-add {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -661,9 +672,18 @@ footer a:hover {
     border: 2px solid darkred;
 }
 
-.close-button:hover {
+.close-button-add:hover {
     background-color: darkred;
     box-shadow: inset 0px 1px 4px darkred;
 }
 
+button img {
+    width: 70px;
+    height: 100px;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid #6B4226;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px black;
+}
 
