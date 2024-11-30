@@ -138,6 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
         // Get selected subtag
         const subtag = document.getElementById("subtags").value;
 
+        // Get the uploaded image
+        const previewIMG = document.getElementById("previewIMG").src;
+
         // Construct the address to search via Geocoding API
         const fullAddress = `${street}, ${city}, ${zip}`;
 
@@ -161,12 +164,13 @@ document.addEventListener("DOMContentLoaded", function () {
                         newLocationButton.type = "button";
 
                         newLocationButton.innerHTML = `
-                            <strong>Location</strong> ${locationName}<br><br>
-                            <strong>Straße</strong> ${street}<br><br>
-                            <strong>PLZ</strong> ${zip}<br><br>
-                            <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
-                            <strong>Subtags</strong> ${subtag}<br><br>
-                            <strong>Latitude</strong> ${lat}<br><br>
+                            <img src="${previewIMG}" alt="${locationName} Image"><br>
+                            <strong>Location</strong> ${locationName}<br>
+                            <strong>Straße</strong> ${street}<br>
+                            <strong>PLZ</strong> ${zip}<br>
+                            <strong>Tags</strong> ${selectedTags.join(", ")}<br>
+                            <strong>Subtags</strong> ${subtag}<br>
+                            <strong>Latitude</strong> ${lat}<br>
                             <strong>Longitude</strong> ${lon}
                         `;
 
@@ -204,7 +208,7 @@ locationList.addEventListener("click", function (event) {
         const subtag = selectedLocation.querySelector("strong:nth-of-type(5)").nextSibling.textContent.trim();
         const latitude = selectedLocation.querySelector("strong:nth-of-type(6)").nextSibling.textContent.trim();
         const longitude = selectedLocation.querySelector("strong:nth-of-type(7)").nextSibling.textContent.trim();
-
+        const imageSrc = selectedLocation.querySelector("img").getAttribute("src");
         // Populate the update screen with the selected location details
         updateDeleteScreen.querySelector("#locationName").value = locationName;
         updateDeleteScreen.querySelector("#street").value = street;
@@ -212,11 +216,13 @@ locationList.addEventListener("click", function (event) {
         updateDeleteScreen.querySelector("#city").value = "Berlin"; // Since city is fixed as "Berlin"
         updateDeleteScreen.querySelector("#description").value = ""; // Empty by default, can be adjusted
         updateDeleteScreen.querySelector("#subtags").value = subtag;
-
+        updateDeleteScreen.querySelector("#updateIMG").src = imageSrc;
+        //updateDeleteScreen.querySelector("#updateIMG").alt = `${locationName} Image`;
         // Populate longitude and latitude as readonly
         updateDeleteScreen.querySelector("#longitude").value = longitude;
         updateDeleteScreen.querySelector("#latitude").value = latitude;
 
+        // Update the image in the update screen
         // Populate tags checkboxes
         const checkboxes = updateDeleteScreen.querySelectorAll("input[name='tags']");
         checkboxes.forEach(checkbox => {
@@ -247,6 +253,9 @@ updateButton.addEventListener("click", function (event) {
     const description = updateDeleteScreen.querySelector("#description").value; // Description
     const subtag = updateDeleteScreen.querySelector("#subtags").value; // Subtag
 
+    // Get the uploaded image
+    const updateIMG = document.getElementById("updateIMG").src;
+
     // Get selected tags
     const selectedTags = Array.from(updateDeleteScreen.querySelectorAll("input[name='tags']:checked")).map(tag => tag.value);
 
@@ -265,12 +274,13 @@ updateButton.addEventListener("click", function (event) {
 
                     // Update the location in the list
                     selectedLocation.innerHTML = `
-                        <strong>Location</strong> ${locationName}<br><br>
-                        <strong>Straße</strong> ${street}<br><br>
-                        <strong>PLZ</strong> ${zip}<br><br>
-                        <strong>Tags</strong> ${selectedTags.join(", ")}<br><br>
-                        <strong>Subtags</strong> ${subtag}<br><br>
-                        <strong>Latitude</strong> ${lat}<br><br>
+                        <img src="${updateIMG}" alt="${locationName} Image"><br>
+                        <strong>Location</strong> ${locationName}<br>
+                        <strong>Straße</strong> ${street}<br>
+                        <strong>PLZ</strong> ${zip}<br>
+                        <strong>Tags</strong> ${selectedTags.join(", ")}<br>
+                        <strong>Subtags</strong> ${subtag}<br>
+                        <strong>Latitude</strong> ${lat}<br>
                         <strong>Longitude</strong> ${lon}
                     `;
                     updateDeleteScreen.style.display = "none"; // Close the update screen after updating
@@ -287,13 +297,30 @@ updateButton.addEventListener("click", function (event) {
         });
 });
     // Delete button logic
-    const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
+    /*const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
     deleteButton.addEventListener("click", function (event) {
         event.preventDefault(); // Prevent form from submitting
 
         selectedLocation.remove(); // Remove the location from the list
         updateDeleteScreen.style.display = "none"; // Close the update screen
-    });
+    });*/
+    const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
+deleteButton.addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent form submission
+
+    if (selectedLocation) {
+        const listItem = selectedLocation.closest("li"); // Find the parent <li>
+        if (listItem) {
+            listItem.remove(); // Remove the <li> element
+            updateDeleteScreen.style.display = "none"; // Close the update screen
+            selectedLocation = null; // Clear the selected location reference
+        } else {
+            console.error("List item not found.");
+        }
+    } else {
+        console.error("No location selected for deletion.");
+    }
+});
 
     // Cancel button logic
     const cancelButton = updateDeleteScreen.querySelector("input[value='cancel']");
@@ -301,5 +328,47 @@ updateButton.addEventListener("click", function (event) {
         event.preventDefault();
         updateDeleteScreen.style.display = "none"; // Close the update screen
     });
+
+    document.getElementById("uploadButton").addEventListener("change", function (event) {
+        const file = event.target.files[0]; // Get the selected file
+    
+        if (file) {
+            const reader = new FileReader(); // Create a FileReader to read the file
+    
+            reader.onload = function (e) {
+                // Set the preview image src to the file's data URL
+                document.getElementById("previewIMG").src = e.target.result;
+            };
+    
+            reader.readAsDataURL(file); // Read the file as a data URL
+        } else {
+            // If no file is selected, reset the preview image
+            document.getElementById("previewIMG").src = "";
+        }
+    });
+    
+    // Handle image upload in the Update Screen
+document.querySelector("#update-delete-screen #uploadButton").addEventListener("change", function (event) {
+    const file = event.target.files[0]; // Get the selected file
+
+    if (file) {
+        const reader = new FileReader(); // Create a FileReader to read the file
+
+        reader.onload = function (e) {
+            // Set the update image src to the file's data URL
+            const updateIMG = document.getElementById("updateIMG");
+            updateIMG.src = e.target.result; // Update the image source
+            updateIMG.alt = "Uploaded Image Preview"; // Update the alt text
+        };
+
+        reader.readAsDataURL(file); // Read the file as a data URL
+    } else {
+        // If no file is selected, reset the update image to a default state
+        const updateIMG = document.getElementById("updateIMG");
+        updateIMG.src = "default.png"; // Replace "default.png" with your default image path
+        updateIMG.alt = "Default Image";
+    }
+});
+
 });
 
