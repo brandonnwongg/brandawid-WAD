@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 addButton.style.display = "inline-block"; // Zeigt den Add-Button für Admin an
                 updateButton.style.display = "inline-block"; // Zeigt den Update-Button für Admin an
                 deleteButton.style.display = "inline-block"; // Zeigt den Delete-Button für Admin an
-            } else if (user.role == "non-admin") {
+            ß} else if (user.role == "non-admin") {
                 headerText.textContent = "Willkommen zurück, Norman!";
                 addButton.style.display = "none"; // Versteckt den Add-Button für non-admin
                 updateButton.style.display = "none"; // Versteckt den Update-Button für non-admin
@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Wrong username/password. Try again");
         }
     });
+
     
 
     loginButton.addEventListener("click", function (event) {

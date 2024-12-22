@@ -1,0 +1,16 @@
+{
+  "name": "brandawid-wad",
+  "version": "1.0.0",
+  "description": "1. Brandon Shou Yuan Wong (580634) 2. Dawid Kopryk (580224)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^6.12.0"
+  }
+}
