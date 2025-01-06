@@ -11,11 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const locationList = document.getElementById("loaction-list");
 
-    const users = [
-        { username: "admina", password: "password", role: "admin", name: "Mina" },
-        { username: "normalo", password: "password", role: "non-admin", name: "Norman" }
-    ];
-
     let isLoggedIn = false;
     let currentUser = null;
     let selectedLocation = null; // Variable to store the selected location details
@@ -29,44 +24,53 @@ document.addEventListener("DOMContentLoaded", function () {
         mainContainer.classList.add("blurred"); // Apply blur effect to main container
         headerText.textContent = "Bitte Login";
     }
-
-    loginForm.addEventListener("submit", function (event) {
+    
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
         event.preventDefault();
     
         const username = document.getElementById("usernameID").value;
         const password = document.getElementById("passwordID").value;
     
-        const user = users.find(u => u.username === username && u.password === password);
-    
-        if (user) {
+        fetch('http://localhost:8000/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(user => {
+            // Assume response contains the user object without the password
             isLoggedIn = true;
             loginScreen.style.display = "none";
             mainContainer.classList.remove("blurred");
             currentUser = user;
     
-            const updateButton = updateDeleteScreen.querySelector("input[value='update']");
-            const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
-    
-            if (user.role == "admin") {
+            if (user.role === "admin") {
                 headerText.textContent = "Willkommen zurück, Mina!";
-                addButton.style.display = "inline-block"; // Zeigt den Add-Button für Admin an
-                updateButton.style.display = "inline-block"; // Zeigt den Update-Button für Admin an
-                deleteButton.style.display = "inline-block"; // Zeigt den Delete-Button für Admin an
-            ß} else if (user.role == "non-admin") {
+                addButton.style.display = "inline-block"; // Show the Add button for Admin
+                updateButton.style.display = "inline-block"; // Show the Update button for Admin
+                deleteButton.style.display = "inline-block"; // Show the Delete button for Admin
+            } else {
                 headerText.textContent = "Willkommen zurück, Norman!";
-                addButton.style.display = "none"; // Versteckt den Add-Button für non-admin
-                updateButton.style.display = "none"; // Versteckt den Update-Button für non-admin
-                deleteButton.style.display = "none"; // Versteckt den Delete-Button für non-admin
+                addButton.style.display = "none"; // Hide the Add button for non-admin
+                updateButton.style.display = "none"; // Hide the Update button for non-admin
+                deleteButton.style.display = "none"; // Hide the Delete button for non-admin
             }
     
             loginButton.value = "LOGOUT";
-        } else {
+        })
+        .catch(error => {
+            console.error('Failed to login:', error);
             alert("Wrong username/password. Try again");
-        }
+        });
     });
-
     
-
     loginButton.addEventListener("click", function (event) {
         if (isLoggedIn && loginButton.value === "LOGOUT") {
             event.preventDefault();
@@ -81,6 +85,7 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Logged out");
         }
     });
+
 
     // Add button for admin
     addButton.addEventListener("click", function () {
@@ -172,12 +177,42 @@ document.addEventListener("DOMContentLoaded", function () {
                             <strong>Tags</strong> ${selectedTags.join(", ")}<br>
                             <strong>Subtags</strong> ${subtag}<br>
                             <strong>Latitude</strong> ${lat}<br>
-                            <strong>Longitude</strong> ${lon}
+                            <strong>Longitude</strong> ${lon}<br>
+                            <strong>Description</strong> ${description}<br>
                         `;
+                        //<strong>Description</strong> ${description}<br>
+                        const payload = {
+                            location: locationName,
+                            description: description,
+                            straße: street,
+                            plz: zip,
+                            tags: selectedTags,
+                            subtags: subtag,
+                            longitude: lon,
+                            latitude: lat,
+                        };
+
+                        // POST request to server to add location
+                        fetch('http://localhost:8000/loc', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(payload)
+                        })
+                        .then(res => res.json())
+                        .then(result => {
+                            console.log("Location saved in database")
+                            addScreen.style.display = "none"; // Close the Add screen after submission
+                        })
+                        .catch(error => {
+                            console.error("Error adding location:", error);
+                            alert("Fehler beim Hinzufügen der Location. Bitte versuchen Sie es später erneut.");
+                        });
 
                         newLocation.appendChild(newLocationButton);
                         locationList.insertBefore(newLocation, locationList.lastElementChild); // Insert before the 'Add' button
-
+                
                         addScreen.style.display = "none"; // Close the Add screen after submission
                     } else {
                         // Location is not in Berlin, show error
@@ -197,28 +232,34 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Locations logic: Open update screen when a location is clicked
 locationList.addEventListener("click", function (event) {
-    if (event.target.tagName === "BUTTON") {
+    let button = event.target.closest('button');
+    //if (event.target.tagName === "BUTTON") {
+    if (button) {
         // Save the clicked location to the selectedLocation variable
         selectedLocation = event.target;
+        const locationId = button.getAttribute('data-id');
+        updateDeleteScreen.setAttribute('data-id', locationId);
+        console.log('Location selected with ID: ', locationId);
 
         // Extract the location details from the selected location
-        const locationName = selectedLocation.querySelector("strong").nextSibling.textContent.trim();
-        const street = selectedLocation.querySelector("strong:nth-of-type(2)").nextSibling.textContent.trim();
-        const zip = selectedLocation.querySelector("strong:nth-of-type(3)").nextSibling.textContent.trim();
-        const tags = selectedLocation.querySelector("strong:nth-of-type(4)").nextSibling.textContent.trim().split(", ");
-        const subtag = selectedLocation.querySelector("strong:nth-of-type(5)").nextSibling.textContent.trim();
-        const latitude = selectedLocation.querySelector("strong:nth-of-type(6)").nextSibling.textContent.trim();
-        const longitude = selectedLocation.querySelector("strong:nth-of-type(7)").nextSibling.textContent.trim();
+        const locationName = selectedLocation.querySelector("strong") ? selectedLocation.querySelector("strong").nextSibling.textContent.trim() : '';
+        const description = selectedLocation.querySelector("strong:nth-of-type(1)") ? selectedLocation.querySelector("strong:nth-of-type(1)").nextSibling.textContent.trim() : '';
+        const street = selectedLocation.querySelector("strong:nth-of-type(2)") ? selectedLocation.querySelector("strong:nth-of-type(2)").nextSibling.textContent.trim() : '';
+        const zip = selectedLocation.querySelector("strong:nth-of-type(3)")? selectedLocation.querySelector("strong:nth-of-type(3)").nextSibling.textContent.trim() : '';
+        const tags = selectedLocation.querySelector("strong:nth-of-type(4)")? selectedLocation.querySelector("strong:nth-of-type(4)").nextSibling.textContent.trim().split(", ") : '';
+        const subtag = selectedLocation.querySelector("strong:nth-of-type(5)")? selectedLocation.querySelector("strong:nth-of-type(5)").nextSibling.textContent.trim() : '';
+        const latitude = selectedLocation.querySelector("strong:nth-of-type(6)")? selectedLocation.querySelector("strong:nth-of-type(6)").nextSibling.textContent.trim() : '';
+        const longitude = selectedLocation.querySelector("strong:nth-of-type(7)")? selectedLocation.querySelector("strong:nth-of-type(7)").nextSibling.textContent.trim() : '';
         const imageSrc = selectedLocation.querySelector("img").getAttribute("src");
         // Populate the update screen with the selected location details
         updateDeleteScreen.querySelector("#locationName").value = locationName;
+        //updateDeleteScreen.querySelector("#description").value = description;
         updateDeleteScreen.querySelector("#street").value = street;
         updateDeleteScreen.querySelector("#zip").value = zip;
-        updateDeleteScreen.querySelector("#city").value = "Berlin"; // Since city is fixed as "Berlin"
-        updateDeleteScreen.querySelector("#description").value = ""; // Empty by default, can be adjusted
+        updateDeleteScreen.querySelector("#city").value = "Berlin"; // Since city is fixed as "Berlin" 
         updateDeleteScreen.querySelector("#subtags").value = subtag;
         updateDeleteScreen.querySelector("#updateIMG").src = imageSrc;
-        //updateDeleteScreen.querySelector("#updateIMG").alt = `${locationName} Image`;
+        updateDeleteScreen.querySelector("#updateIMG").alt = `${locationName} Image`;
         // Populate longitude and latitude as readonly
         updateDeleteScreen.querySelector("#longitude").value = longitude;
         updateDeleteScreen.querySelector("#latitude").value = latitude;
@@ -246,6 +287,7 @@ const updateButton = updateDeleteScreen.querySelector("input[value='update']");
 updateButton.addEventListener("click", function (event) {
     event.preventDefault(); // Prevent the form from submitting
 
+    const locationId = updateDeleteScreen.getAttribute('data-id');
     // Perform the Geocoding update process
     const locationName = updateDeleteScreen.querySelector("#locationName").value;
     const street = updateDeleteScreen.querySelector("#street").value;
@@ -281,9 +323,40 @@ updateButton.addEventListener("click", function (event) {
                         <strong>PLZ</strong> ${zip}<br>
                         <strong>Tags</strong> ${selectedTags.join(", ")}<br>
                         <strong>Subtags</strong> ${subtag}<br>
+                        <strong>Longitude</strong> ${lon}<br>
                         <strong>Latitude</strong> ${lat}<br>
-                        <strong>Longitude</strong> ${lon}
+                        <strong>Description</strong> ${description}<br>
                     `;
+
+                    const updateData = {
+                        location: locationName,
+                        description: description,
+                        straße: street,
+                        plz: zip,
+                        tags: selectedTags,
+                        subtags: subtag,
+                        longitude: lon,
+                        latitude: lat,
+                    };
+                    
+                    // POST request to server to add location
+                    fetch(`http://localhost:8000/loc/${locationId}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(updateData)
+                    })
+                    .then(res => res.json())
+                    .then(result => {
+                        console.log('Location changed successfully in database');
+                        addScreen.style.display = "none"; // Close the Add screen after submission
+                    })
+                    .catch(error => {
+                        console.error("Error changing location:", error);
+                        alert("Error changing location. Try Later");
+                    });
+
                     updateDeleteScreen.style.display = "none"; // Close the update screen after updating
                 } else {
                     alert("Die angegebene Location muss in Berlin liegen. Andere Bundesländer werden nicht akzeptiert.");
@@ -297,29 +370,42 @@ updateButton.addEventListener("click", function (event) {
             alert("Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.");
         });
 });
-    // Delete button logic
-    /*const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
-    deleteButton.addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent form from submitting
 
-        selectedLocation.remove(); // Remove the location from the list
-        updateDeleteScreen.style.display = "none"; // Close the update screen
-    });*/
-    const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
+const deleteButton = updateDeleteScreen.querySelector("input[value='delete']");
 deleteButton.addEventListener("click", function (event) {
     event.preventDefault(); // Prevent form submission
 
-    if (selectedLocation) {
-        const listItem = selectedLocation.closest("li"); // Find the parent <li>
-        if (listItem) {
-            listItem.remove(); // Remove the <li> element
-            updateDeleteScreen.style.display = "none"; // Close the update screen
-            selectedLocation = null; // Clear the selected location reference
-        } else {
-            console.error("List item not found.");
-        }
+    const locationId = updateDeleteScreen.getAttribute('data-id');
+
+    if (locationId) {
+        // Perform the DELETE request to the backend
+        fetch(`http://localhost:8000/loc/${locationId}`, {
+            method: 'DELETE'
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to delete location');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Location sucessfully deleted from database');
+
+            const listItem = selectedLocation.closest("li"); // Find the parent <li>
+            if (listItem) {
+                listItem.remove(); // Remove the <li> element
+                updateDeleteScreen.style.display = "none"; // Close the update screen
+                selectedLocation = null; // Clear the selected location reference
+            } else {
+                console.error("List item not found.");
+            }
+        })
+        .catch(error => {
+            console.error("Error deleting location:", error);
+            alert("Error deleting location. Try again later.");
+        });
     } else {
-        console.error("No location selected for deletion.");
+        console.error("No location selected for deletion or locationId missing.");
     }
 });
 

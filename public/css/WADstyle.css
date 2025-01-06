@@ -419,7 +419,7 @@ input[type="checkbox"]:checked {
 
 #location-list button {
     width: 100%;
-    height: 310px;
+    height: 370px;
     background-color: #7e6188; /* Button background color */
     padding: 10px;
     margin: 5px 0;
@@ -478,7 +478,7 @@ input[type="checkbox"]:checked {
         grid-template-columns: repeat(3, 1fr);
     }
     #location-list button {
-        height: 340px; /* Increase height by 10px */
+        height: 410px; /* Increase height by 10px */
     }
 }
 
@@ -487,7 +487,7 @@ input[type="checkbox"]:checked {
         grid-template-columns: repeat(2, 1fr); 
     }
     #location-list button {
-        height: 340px; /* Increase height by 10px */
+        height: 410px; /* Increase height by 10px */
     }
 }
 
@@ -496,7 +496,7 @@ input[type="checkbox"]:checked {
         grid-template-columns: repeat(1, 1fr); 
     }
     #location-list button {
-        height: 340px; /* Increase height by 10px */
+        height: 410px; /* Increase height by 10px */
     }
 }
 

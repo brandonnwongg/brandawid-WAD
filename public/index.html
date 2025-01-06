@@ -8,6 +8,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
     <script src="js/loginstart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://localhost:8000/loc') // Adjust this URL to your API endpoint
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json(); // Parse JSON from the response
+                })
+                .then(locations => {
+                    const locationsList = document.getElementById('loaction-list');
+                    const addButtonLi = document.getElementById('adminAddButton').parentNode; 
+                    locations.forEach(location => {
+                        // Create list item
+                        const li = document.createElement('li');
+                        
+                        // Create button with location details
+                        const button = document.createElement('button');
+                        button.setAttribute('data-id', location._id);
+                        button.type = 'button';
+                        button.innerHTML = `
+                            <img src="${location.image}" alt="${location.location} Image"><br>
+                            <strong>Location</strong> ${location.location}<br>
+                            <strong>Straße</strong> ${location.straße}<br>
+                            <strong>PLZ</strong> ${location.plz}<br>
+                            <strong>Tags</strong> ${location.tags}<br>
+                            <strong>Subtags</strong> ${location.subtags}<br>
+                            <strong>Longitude</strong> ${location.longitude}<br>
+                            <strong>Latitude</strong> ${location.latitude}<br>
+                            <strong>Description</strong> ${location.description}
+                        `;
+                        
+                        // Append button to list item, then list item to the list
+                        li.appendChild(button);
+                        locationsList.insertBefore(li, addButtonLi);
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching locations:', error);
+                    // Optionally update the DOM to reflect an error loading locations
+                    locationsList.innerHTML = `<li>Error loading locations</li>`;
+                });
+        });
+        </script>
+        
+        
+        
 </head>
 <body>
     <div id ="login-screen">
@@ -51,7 +98,7 @@
         
             <!-- Description -->
             <label for="description">Description</label>
-            <input type="text" id="description" name="description" placeholder="Describe the issue" required />
+            <input type="text" id="description" name="description" placeholder="Describe the issue" />
         
             <!-- Street & No. -->
             <label for="street">Street & No.</label>
@@ -114,7 +161,7 @@
             
             <!-- Issue -->
             <label for="description">DESCRIPTION</label>
-            <input type="text" id="description" name="description" value="Smoking/Trash Bin is damaged" required/>
+            <input type="text" id="description" name="description" value="No Description" />
             
             <!-- Street & No. -->
             <label for="street">STREET & NO. </label>
@@ -195,7 +242,7 @@
             </div>
             
             <ul id="loaction-list">
-                <li><button type="button" id="firstLocation">
+               <!-- <li><button type="button" id="firstLocation">
                     <img src="hermanstrasse.png" alt="Hermannstraße Image"><br>
                     <strong>Location</strong>S-Hermannstraße<br>
                     <strong>Straße</strong>Hermannstraße 160<br>
@@ -224,7 +271,7 @@
                     <strong>Subtags</strong>mangelhaft<br>
                     <strong>Longitude</strong>52.4416953<br>
                     <strong>Latitude</strong>13.45678908
-                </button></li>
+                </button></li> -->
                 <li><button type="button" id="adminAddButton">Add</button></li>
                 <!-- Füge hier weitere Standorte hinzu -->
             </ul>
