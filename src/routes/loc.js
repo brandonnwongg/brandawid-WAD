@@ -60,7 +60,7 @@ router.put('/:id', async (req, res) => {
       const updateData = req.body;
       const updatedLocation = await mongoCRUDs.updateLocation(locationId, updateData);
       if (updatedLocation) {
-          res.status(204).json({ message: "Location updated successfully", location: updatedLocation });
+          res.status(200).json({ message: "Location updated successfully", location: updatedLocation });
       } else {
           res.status(404).send("Location not found");
       }
